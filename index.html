@@ -94,14 +94,15 @@ input{width:100%;min-height:50px;font:inherit;font-size:16px;padding:10px 12px;b
 .ov img{width:auto;max-width:min(420px,100%);max-height:62vh;object-fit:contain;border:3px solid #fff;background:#fff}
 .ov .btn{max-width:420px;width:100%}
 .uf{display:inline-block;background:var(--b);color:#fff;font:11px "Archivo Black",sans-serif;padding:4px 8px;border:2px solid var(--ln);margin:6px 6px 0 0;letter-spacing:.06em;transform:rotate(-2deg)}
+.hero>.sticker{animation:flt 3.6s ease-in-out infinite}
 .hint{font-size:12px;color:var(--mut);text-align:center}
 .toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translate(-50%,30px);background:#171717;color:#fff;padding:12px 18px;border:2px solid var(--y);font-weight:700;font-size:14px;opacity:0;transition:.3s;pointer-events:none;z-index:99;max-width:90vw;text-align:center}
 .toast.on{opacity:1;transform:translate(-50%,0)}
 .cf{position:fixed;width:9px;height:9px;pointer-events:none;z-index:98}
 footer{font-size:11px;line-height:1.5;color:var(--mut);margin-top:20px}
-.sticker{position:absolute;right:-4px;top:-26px;width:84px;height:84px;background:var(--y);color:var(--on);border:3px solid var(--ln);border-radius:50%;display:grid;place-items:center;text-align:center;font:11px/1.1 "Archivo Black";transform:rotate(11deg)}
+.sticker{position:relative;margin:14px 6px 0 auto;width:84px;height:84px;background:var(--y);color:var(--on);border:3px solid var(--ln);border-radius:50%;display:grid;place-items:center;text-align:center;font:11px/1.1 "Archivo Black";transform:rotate(11deg)}
 .hero{position:relative}
-@media(min-width:620px){.opts{grid-template-columns:1fr 1fr}.btn{width:auto;min-width:260px}.sticker{width:110px;height:110px;font-size:14px;top:10px}}
+@media(min-width:620px){.opts{grid-template-columns:1fr 1fr}.btn{width:auto;min-width:260px}.sticker{position:absolute;right:-4px;margin:0;width:110px;height:110px;font-size:14px;top:10px}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
@@ -113,10 +114,10 @@ footer{font-size:11px;line-height:1.5;color:var(--mut);margin-top:20px}
 <section id="intro">
  <div class="hero"><span class="kicker">Saúde do trabalhador · Nível difícil</span>
  <h1>Quem move a cidade <span>precisa de cuidado.</span></h1>
- <p class="lead">Catadores, ambulantes, trabalhadoras domésticas e profissionais da construção civil enfrentam situações em que “bom senso” não basta. Você consegue interpretar?</p>
+ <p class="lead">Catadores, garis, ambulantes, trabalhadoras domésticas e profissionais da construção civil enfrentam situações em que “bom senso” não basta. Você consegue interpretar?</p>
  <div class="sticker">TRABALHO<br>DIGNO<br>JÁ!</div></div>
  <div class="panel">
-  <h2 class="ptitle">10 situações. 4 alternativas. 1 leitura certa.</h2>
+  <h2 class="ptitle">12 situações. 4 alternativas. 1 leitura certa.</h2>
   <p class="copy">As alternativas parecem todas razoáveis, mas só uma considera precarização, determinantes sociais, políticas públicas, riscos psicossociais e direitos. Leia a explicação após cada resposta. Quem gabarita ganha um card para postar!</p>
   <button class="btn p" id="start">Bora jogar →</button>
   <button class="btn" id="share0">↗ Compartilhar jogo</button>
@@ -190,9 +191,16 @@ o:["Primazia da realidade: importa como a relação funcionava (subordinação, 
 e:"No Direito do Trabalho, a forma não pode mascarar a realidade. Se há subordinação e os demais elementos, o vínculo pode ser reconhecido, mesmo com contrato de “autônomo”. A discussão é caso a caso (Justiça do Trabalho, sindicato, Defensoria). Em qualquer cenário, quem se acidenta deve receber atendimento e ter o caso notificado."},
 {c:"Organização coletiva · Participação",q:"Ambulantes de uma feira pedem banheiro e água potável. A prefeitura responde que “isso não é função do município” e cada vendedor passa a improvisar sozinho.",a:"Qual estratégia é mais efetiva e coerente com a saúde do trabalhador?",
 o:["Mapear coletivamente os riscos e levar a demanda a conselho de saúde, vigilância e Ministério Público, transformando o problema individual em pauta pública.","Cada um resolver do seu jeito, para evitar conflito com a prefeitura.","Esperar uma campanha educativa sobre hidratação.","Suspender as vendas até que alguém se manifeste."],
-e:"Problemas compartilhados ganham força quando aparecem como demanda coletiva, com dados e registro. Associações, sindicatos, conselhos de saúde e o Ministério Público são canais legítimos. A organização não substitui o dever do poder público, mas amplia a voz de quem trabalha e torna visível um risco que parecia “natural”."}
+e:"Problemas compartilhados ganham força quando aparecem como demanda coletiva, com dados e registro. Associações, sindicatos, conselhos de saúde e o Ministério Público são canais legítimos. A organização não substitui o dever do poder público, mas amplia a voz de quem trabalha e torna visível um risco que parecia “natural”."},
+{c:"Garis · Coleta e ritmo de trabalho",q:"Em uma empresa de limpeza urbana, coletores de lixo trabalham por rota: quem termina mais cedo vai embora e ainda ganha prêmio por produtividade. Para ganhar tempo, alguns correm atrás do caminhão e se penduram no estribo em movimento, e sacos rompidos escondem vidro e seringas.",a:"Como interpretar o aumento de acidentes?",
+o:["Como efeito da organização do trabalho: metas e prêmios por velocidade empurram atalhos arriscados, somados a trânsito e resíduos mal descartados. É preciso rever ritmo, equipamentos e descarte, ouvindo os coletores.","Como falta de atenção: basta uma campanha para os coletores “se cuidarem mais”.","Como consequência inevitável da profissão, que o prêmio apenas compensa.","Como problema só do motorista, já que o coletor apenas acompanha o veículo."],
+e:"Quando o ganho (ir embora mais cedo, prêmio) depende de ser rápido, o risco fica embutido no desenho do trabalho e parece “escolha” do coletor. Somam-se trânsito, resíduos perfurocortantes descartados sem cuidado e equipamentos inadequados. Prevenir exige rever metas e prêmios, ritmo, segurança do veículo e descarte correto pela população, com participação dos trabalhadores."},
+{c:"Garis · Sanitários e reconhecimento",q:"Uma gari de varrição passou a beber pouca água na jornada para não precisar de banheiro: não há sanitário na rota e os comércios negam o uso. Ela já teve infecção urinária de repetição e diz que “ninguém enxerga” o trabalho dela.",a:"Qual interpretação é mais adequada?",
+o:["A falta de sanitário e água na rota e o desprezo social são fatores de adoecimento físico e mental; garantir pontos de apoio faz parte da organização do serviço e do contrato.","Restringir líquidos é uma adaptação razoável, bastando que ela se programe melhor.","A infecção é problema pessoal de higiene; a empresa só precisa fornecer uniforme.","Sentir-se invisível é questão subjetiva, sem relação com as condições de trabalho."],
+e:"Beber pouco para evitar o banheiro é uma adaptação forçada pela falta de estrutura e pode favorecer infecção urinária e desidratação. O desrespeito cotidiano e a invisibilidade social também afetam a saúde mental. A resposta está na organização e no contrato do serviço: pontos de apoio com sanitário, água e descanso, além de reconhecimento e participação dos trabalhadores."}
 ];
-const W={"Catadores · Organização do trabalho":"As outras alternativas colocam a culpa no catador (desatenção, seguro próprio) ou só tratam o corte depois. Ignoram que o perigo entra no processo por falhas de coleta e estrutura.",
+const N=bank.length;
+const W={"Garis · Coleta e ritmo de trabalho":"As outras culpam o indivíduo, naturalizam o risco ou isolam o problema em uma pessoa só. Não enxergam que metas, prêmios e rotas moldam o comportamento no trabalho.","Garis · Sanitários e reconhecimento":"As outras tratam a situação como escolha ou falha individual (higiene, planejamento) ou negam o sofrimento. Não olham para a ausência de sanitário e água, nem para o reconhecimento social do trabalho.","Catadores · Organização do trabalho":"As outras alternativas colocam a culpa no catador (desatenção, seguro próprio) ou só tratam o corte depois. Ignoram que o perigo entra no processo por falhas de coleta e estrutura.",
 "Ambulantes · Calor e território":"As outras tratam o mal-estar como fraqueza pessoal, mascaram o sinal com energético ou negam o direito por ser trabalho por conta própria. Todas ignoram a falta de sombra, água e banheiro.",
 "Trabalho doméstico · Vínculo e saúde":"As outras confundem duas coisas: investigar a relação doença-trabalho no SUS (não exige carteira) e reconhecer vínculo e direitos. Também naturalizam a dor como algo sem relação com as tarefas.",
 "Construção civil · Precarização":"As outras culpam o trabalhador (imprudência), recorrem ao acaso ou limitam tudo ao EPI. Não enxergam que contratação, pagamento por produção e subcontratação moldam o ritmo e o risco.",
@@ -212,8 +220,8 @@ function toast(t){const e=$("#toast");e.textContent=t;e.classList.add("on");setT
 function count(el,to,fmt,d=900){if(RM){el.innerHTML=fmt(to);return}const t0=performance.now();(function f(t){const p=Math.min(1,(t-t0)/d),v=Math.round(to*(1-Math.pow(1-p,3)));el.innerHTML=fmt(v);if(p<1)requestAnimationFrame(f)})(t0)}
 function confetti(x,y,n=16){if(RM)return;const c=["#f2e92e","#ff4c83","#2455e8","#b9ed54"];for(let k=0;k<n;k++){const d=document.createElement("div");d.className="cf";d.style.cssText=`left:${x}px;top:${y}px;background:${c[k%4]};border-radius:${k%2?"50%":"0"}`;document.body.appendChild(d);const a=Math.random()*6.28,r=60+Math.random()*140;d.animate([{transform:"translate(0,0) rotate(0)",opacity:1},{transform:`translate(${Math.cos(a)*r}px,${Math.sin(a)*r+90}px) rotate(${Math.random()*540}deg)`,opacity:0}],{duration:900+Math.random()*500,easing:"cubic-bezier(.2,.7,.3,1)"}).onfinish=()=>d.remove()}}
 function start(){Q=sh(bank).map(b=>({...b,opts:sh(b.o.map((t,k)=>({t,ok:k===0})))}));i=hits=pts=streak=best=ans=0;res=[];$("#pts").textContent="0 PTS";show("game");render()}
-function render(){done=false;const b=Q[i];$("#cnt").textContent=`Situação ${String(i+1).padStart(2,"0")} / 10`;
- $("#fill").style.width=(i/10*100)+"%";$("#cat").textContent=b.c;$("#q").textContent=b.q;$("#ask").textContent=b.a;
+function render(){done=false;const b=Q[i];$("#cnt").textContent=`Situação ${String(i+1).padStart(2,"0")} / ${N}`;
+ $("#fill").style.width=(i/N*100)+"%";$("#cat").textContent=b.c;$("#q").textContent=b.q;$("#ask").textContent=b.a;
  $("#fb").classList.add("hidden");$("#next").classList.add("hidden");
  const box=$("#opts");box.innerHTML="";
  b.opts.forEach((o,k)=>{const x=document.createElement("button");x.className="opt";x.innerHTML=`<i>${L[k]}</i><span></span>`;x.lastChild.textContent=o.t;x.onclick=()=>pick(k,x);box.appendChild(x);anim(x,[{opacity:0,transform:"translateY(18px)"},{opacity:1,transform:"none"}],{duration:420,delay:140+k*70,easing:"cubic-bezier(.2,.8,.2,1)",fill:"backwards"})});
@@ -227,19 +235,19 @@ function pick(k,btn){if(done)return;done=true;const b=Q[i],ok=b.opts[k].ok,all=[
   confetti(r.left+r.width/2,r.top+r.height/2);$("#fbt").textContent=`✓ Leitura certa! +${g} pts`+(streak>1?` · sequência x${streak}`:"")}
  else{streak=0;anim(btn,[{transform:"translateX(0)"},{transform:"translateX(-9px)"},{transform:"translateX(9px)"},{transform:"translateX(-6px)"},{transform:"translateX(0)"}],{duration:420});$("#fbt").textContent="✕ Vale revisar. A resposta certa está em verde."}
  $("#fbp").textContent=b.e;$("#fb").classList.remove("hidden");anim($("#fb"),[{opacity:0,transform:"translateY(14px)"},{opacity:1,transform:"none"}],{duration:400});
- $("#fill").style.width=((i+1)/10*100)+"%";
- const n=$("#next");n.textContent=i===9?"Ver resultado 🏁":"Próxima →";n.classList.remove("hidden");
+ $("#fill").style.width=((i+1)/N*100)+"%";
+ const n=$("#next");n.textContent=i===N-1?"Ver resultado 🏁":"Próxima →";n.classList.remove("hidden");
  setTimeout(()=>n.scrollIntoView({behavior:RM?"auto":"smooth",block:"center"}),350)}
-$("#next").onclick=()=>{if(i<9){i++;render();scrollTo({top:0,behavior:RM?"auto":"smooth"})}else end()};
-function end(){if(!ans){show("intro");toast("Jogo encerrado. Volte quando quiser! ✊🏽");return}const t=ans<10?["JOGO ENCERRADO","Parada estratégica","Você respondeu "+ans+" de 10 situações e acertou "+hits+". Quando quiser, volte e tente completar!"]:hits===10?["GABARITOU!","Você é referência em saúde do trabalhador","Nenhuma situação passou batido: você leu o contexto, os direitos e as condições de trabalho. Gere seu card de vitória!"]:hits>=8?["QUASE LÁ!","Leitura crítica afiada","Você enxerga bem além do bom senso. Revise as explicações das que escaparam e tente gabaritar."]:hits>=5?["BOM CAMINHO","Entendimento em construção","Você acertou boa parte, mas algumas situações pedem uma leitura mais estrutural. A revisão ajuda."]:["PARTICIPAÇÃO CONTA!","Hora de revisar o olhar","Essas situações são difíceis de propósito. Leia a revisão e jogue de novo com a lente da precarização."];
+$("#next").onclick=()=>{if(i<N-1){i++;render();scrollTo({top:0,behavior:RM?"auto":"smooth"})}else end()};
+function end(){if(!ans){show("intro");toast("Jogo encerrado. Volte quando quiser! ✊🏽");return}const t=ans<N?["JOGO ENCERRADO","Parada estratégica","Você respondeu "+ans+" de "+N+" situações e acertou "+hits+". Quando quiser, volte e tente completar!"]:hits===N?["GABARITOU!","Você é referência em saúde do trabalhador","Nenhuma situação passou batido: você leu o contexto, os direitos e as condições de trabalho. Gere seu card de vitória!"]:hits>=N-2?["QUASE LÁ!","Leitura crítica afiada","Você enxerga bem além do bom senso. Revise as explicações das que escaparam e tente gabaritar."]:hits>=Math.ceil(N/2)?["BOM CAMINHO","Entendimento em construção","Você acertou boa parte, mas algumas situações pedem uma leitura mais estrutural. A revisão ajuda."]:["PARTICIPAÇÃO CONTA!","Hora de revisar o olhar","Essas situações são difíceis de propósito. Leia a revisão e jogue de novo com a lente da precarização."];
  show("result");$("#rs").textContent=t[0];$("#rt").textContent=t[1];$("#rc").textContent=t[2];
  count($("#big"),hits,v=>`${v}<small>/${ans}</small>`,1100);count($("#rh"),hits,String);count($("#rp"),pts,String,1200);$("#rs2").textContent=best;
  anim($("#rs"),[{transform:"scale(3) rotate(-14deg)",opacity:0},{transform:"scale(1) rotate(-4deg)",opacity:1}],{duration:600,easing:"cubic-bezier(.2,1.4,.4,1)"});
- const gab=hits===10;$("#gc").disabled=!gab;$("#gh").textContent=gab?"🏆 Card liberado! Digite seu nome acima.":"🔒 O card 3x4 é liberado com 10/10. Tente de novo!";
+ const gab=hits===N;$("#gc").disabled=!gab;$("#gh").textContent=gab?"🏆 Card liberado! Digite seu nome acima.":"🔒 O card 3x4 é liberado com "+N+"/"+N+". Tente de novo!";
  $("#ov").classList.add("hidden");
  $("#rev").innerHTML=Q.slice(0,ans).map((b,n)=>{const r=res[n];return `<details class="ri ${r.ok?"y":"n"}"${r.ok?"":" open"}><summary><b>${r.ok?"✓":"✕"}</b> ${n+1}. ${b.c}</summary><p>${b.q}</p>${r.ok?"":`<p class="w"><b>Você marcou:</b> ${r.ch}</p>`}<p class="g"><b>Resposta certa:</b> ${b.opts.find(o=>o.ok).t}</p>${r.ok?"":`<p><b>Por que você errou:</b> ${W[b.c]}</p>`}<p><b>Por que a certa é a certa:</b> ${b.e}</p></details>`}).join("");
  if(gab)setTimeout(()=>{for(let k=0;k<5;k++)setTimeout(()=>confetti(innerWidth*Math.random(),innerHeight*.35,28),k*250)},500)}
-async function shareGame(){const d={title:"Trampo em Jogo",text:"Encare 10 situações difíceis sobre saúde do trabalhador. Será que você gabarita? ✊🏽",url:location.href};
+async function shareGame(){const d={title:"Trampo em Jogo",text:"Encare 12 situações difíceis sobre saúde do trabalhador. Será que você gabarita? ✊🏽",url:location.href};
  if(navigator.share){try{await navigator.share(d);return}catch(e){if(e.name==="AbortError")return}}
  try{await navigator.clipboard.writeText(d.url);toast("Link copiado! Cole onde quiser 🔗")}catch(e){const t=document.createElement("input");t.value=d.url;document.body.appendChild(t);t.select();try{document.execCommand("copy");toast("Link copiado! 🔗")}catch(_){prompt("Copie o link:",d.url)}t.remove()}}
 ["share0","share1"].forEach(x=>$("#"+x).onclick=shareGame);
@@ -250,19 +258,19 @@ async function make(kind){try{await document.fonts.load('80px "Archivo Black"')}
  const box=(x,y,w,h,f)=>{c.fillStyle="#171717";c.fillRect(x+14,y+14,w,h);c.fillStyle=f;c.fillRect(x,y,w,h);c.lineWidth=6;c.strokeStyle="#171717";c.strokeRect(x,y,w,h)};
  c.textAlign="center";const cred=(y0,col)=>{c.fillStyle=col;c.font=`700 18px ${S}`;c.fillText("DESENVOLVIDO POR GRADUANDAS DO 1º PERÍODO DE ENFERMAGEM",540,y0+30);c.font=`21px ${F}`;c.fillText("UNIVERSIDADE FEDERAL DO RIO DE JANEIRO · UFRJ",540,y0+60);c.font=`600 17px ${S}`;c.fillText("Gabriele C. O. dos Santos · Laís M. O. S. Sawaki",540,y0+86);c.fillText("Yasmin Medeiros da Silva · Yris dos Santos Bonfim",540,y0+110)};c.fillStyle="#171717";let y=kind==="card"?110:170;
  if(kind==="card"){box(90,y-30,900,1020,"#fffdf6");c.fillStyle="#ff4c83";c.save();c.translate(540,y+70);c.rotate(-.05);c.font=`72px ${F}`;c.fillText("GABARITEI!",0,0);c.restore();
-  c.fillStyle="#171717";c.font=`300px ${F}`;c.fillText("10/10",540,y+390);c.font=`34px ${S}`;c.font=`700 38px ${S}`;c.fillText("situações difíceis de saúde do trabalhador",540,y+460);
+  c.fillStyle="#171717";c.font=`300px ${F}`;c.fillText(N+"/"+N,540,y+390);c.font=`34px ${S}`;c.font=`700 38px ${S}`;c.fillText("situações difíceis de saúde do trabalhador",540,y+460);
   c.font=`64px ${F}`;c.fillStyle="#2455e8";let yy=wrap(c,(nm||"Seu nome aqui").toUpperCase(),540,y+600,780,76);
   c.fillStyle="#171717";c.font=`700 34px ${S}`;wrap(c,"Pontuação: "+pts+" pts · Maior sequência: "+best,540,yy+30,780,44);
   c.fillStyle="#171717";c.font=`40px ${F}`;c.fillText("TRAMPO EM JOGO",540,1150);box(90,1185,900,80,"#fffdf6");cred(1312,"#fff")}
  else if(kind==="invite"){c.lineWidth=6;c.strokeStyle="#171717";[["#2455e8",1000,260,420],["#ff4c83",60,1500,520]].forEach(([f,x,yy,r])=>{c.fillStyle=f;c.beginPath();c.arc(x,yy,r,0,7);c.fill();c.stroke()});
   c.fillStyle="#171717";c.font=`150px ${F}`;c.fillText("TRAMPO",540,380);c.fillText("EM JOGO",540,540);
   box(90,650,900,520,"#fffdf6");c.fillStyle="#171717";c.font=`700 38px ${S}`;c.fillText("Saúde do trabalhador · nível difícil",540,740);
-  c.font=`64px ${F}`;c.fillText("10 SITUAÇÕES",540,850);c.fillStyle="#2455e8";c.fillText("4 ALTERNATIVAS",540,940);c.fillStyle="#ff4c83";c.fillText("1 LEITURA CERTA",540,1030);
-  c.fillStyle="#171717";c.font=`700 32px ${S}`;c.fillText("Catadores, ambulantes,",540,1090);c.fillText("domésticas e construção civil",540,1135);
+  c.font=`64px ${F}`;c.fillText(N+" SITUAÇÕES",540,850);c.fillStyle="#2455e8";c.fillText("4 ALTERNATIVAS",540,940);c.fillStyle="#ff4c83";c.fillText("1 LEITURA CERTA",540,1030);
+  c.fillStyle="#171717";c.font=`700 32px ${S}`;c.fillText("Catadores, garis, ambulantes,",540,1090);c.fillText("domésticas e construção civil",540,1135);
   box(90,1290,900,130,"#ff4c83");c.fillStyle="#171717";c.font=`40px ${F}`;c.fillText("SERÁ QUE VOCÊ GABARITA?",540,1373);
   c.font=`700 30px ${S}`;c.fillText("JOGUE AGORA",540,1500);box(90,1525,900,150,"#fffdf6");cred(H-130,"#171717")}
  else{c.font=`110px ${F}`;c.fillText("TRAMPO",540,y+80);c.fillText("EM JOGO",540,y+200);
-  box(90,y+300,900,820,"#fffdf6");c.fillStyle="#171717";c.font=`700 40px ${S}`;c.fillText((nm?nm+" fez":"Eu fiz"),540,y+400);c.font=`330px ${F}`;c.fillText(hits+"/10",540,y+720);
+  box(90,y+300,900,820,"#fffdf6");c.fillStyle="#171717";c.font=`700 40px ${S}`;c.fillText((nm?nm+" fez":"Eu fiz"),540,y+400);c.font=`330px ${F}`;c.fillText(hits+"/"+ans,540,y+720);
   c.font=`56px ${F}`;c.fillStyle="#ff4c83";c.fillText($("#rs").textContent,540,y+830);c.fillStyle="#171717";c.font=`700 38px ${S}`;c.fillText(pts+" pontos · sequência "+best,540,y+920);c.fillText("Saúde do trabalhador · nível difícil",540,y+990);
   box(90,y+1230,900,130,"#ff4c83");c.fillStyle="#171717";c.font=`40px ${F}`;c.fillText("SERÁ QUE VOCÊ GABARITA?",540,y+1313);c.font=`700 30px ${S}`;c.fillText("JOGUE AGORA",540,1595);box(90,1615,900,120,"#fffdf6");cred(H-130,"#171717")}
  return new Promise(r=>cv.toBlob(b=>r({b,u:URL.createObjectURL(b)}),"image/png"))}
@@ -272,7 +280,7 @@ async function dl(){if(!imgBlob)return;const fn="trampo-em-jogo-"+imgKind+".png"
  if(d){try{await d.save({filename:fn,data:imgBlob});toast("Imagem salva! ✓")}catch(e){if(e.code!=="declined")toast("Não deu para baixar. Use Compartilhar imagem.")}return}
  const a=document.createElement("a");a.href=$("#img").src;a.download=fn;document.body.appendChild(a);a.click();a.remove();toast("Baixando imagem…")}
 $("#dl").onclick=dl;$("#inv").onclick=()=>gen("invite");$("#cl").onclick=()=>{$("#ov").classList.add("hidden");document.body.style.overflow=""};
-$("#gs").onclick=()=>gen("story");$("#gc").onclick=()=>hits===10&&gen("card");
+$("#gs").onclick=()=>gen("story");$("#gc").onclick=()=>hits===N&&gen("card");
 $("#si").onclick=async()=>{const f=new File([imgBlob],"trampo-em-jogo.png",{type:"image/png"}),d={files:[f],title:"Trampo em Jogo",text:"Joguei Trampo em Jogo! "+location.href};
  if(navigator.canShare&&navigator.canShare({files:[f]})){try{await navigator.share(d);return}catch(e){if(e.name==="AbortError")return}}toast("Segure a imagem para salvar e poste nas redes 📲")};
 let qt;$("#quit").onclick=function(){if(this.dataset.s){clearTimeout(qt);delete this.dataset.s;this.textContent="✋ Encerrar jogo";end();return}this.dataset.s=1;this.textContent="Toque de novo para encerrar";qt=setTimeout(()=>{delete this.dataset.s;this.textContent="✋ Encerrar jogo"},3000)};
