@@ -21,8 +21,7 @@ html{color-scheme:light}
 @keyframes sh{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
 .sticker{animation:flt 3.6s ease-in-out infinite}
 .mark{animation:wob 3.2s ease-in-out infinite}
-.hero>*{animation:up .7s cubic-bezier(.2,.8,.2,1) backwards}
-.hero>h1{animation-delay:.12s}.hero>.lead{animation-delay:.24s}
+.mw{display:inline-block}
 #intro .panel{animation:up .7s .35s cubic-bezier(.2,.8,.2,1) backwards}
 #start{animation:beat 1.8s ease-in-out infinite}
 .fill{position:relative}
@@ -78,7 +77,7 @@ h1 span{color:var(--p);-webkit-text-stroke:1px var(--ln);text-shadow:3px 3px 0 v
 .fb{margin-top:16px;border:2px solid var(--ln);padding:15px;background:var(--bg)}
 .fb h3{font:17px "Archivo Black";margin-bottom:8px}.fb p{font-size:14.5px;line-height:1.6;margin-bottom:0}
 .stamp{display:inline-block;font:13px "Archivo Black";background:var(--p);color:var(--on);border:2px solid var(--ln);padding:6px 10px;text-transform:uppercase;transform:rotate(-4deg)}
-.big{font:clamp(64px,22vw,120px)/1 "Archivo Black";margin:10px 0 0}
+.big{font:clamp(52px,17vw,96px)/1 "Archivo Black";margin:10px 0 0}
 .big small{font-size:.35em;opacity:.6}
 .rev{margin-top:14px;display:grid;gap:6px;font-size:13px}
 .rev div{display:flex;gap:8px;align-items:flex-start;border-bottom:1px dashed var(--ln);padding:6px 0}
@@ -91,10 +90,18 @@ input{width:100%;min-height:50px;font:inherit;font-size:16px;padding:10px 12px;b
 .ri .w{background:var(--ko);padding:8px;border-left:5px solid #c03e61}
 .ri .g{background:var(--ok);padding:8px;border-left:5px solid #26804d}
 .ov{position:fixed;inset:0;z-index:100;background:rgba(23,23,23,.92);overflow:auto;padding:calc(16px + env(safe-area-inset-top,0px)) 14px calc(24px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;align-items:center}
-.ov img{width:auto;max-width:min(420px,100%);max-height:62vh;object-fit:contain;border:3px solid #fff;background:#fff}
+.ov img{width:auto;max-width:min(420px,100%);max-height:50vh;object-fit:contain;border:3px solid #fff;background:#fff}
 .ov .btn{max-width:420px;width:100%}
+.sw{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:8px 0 6px}
+.sw button{width:48px;height:48px;border:3px solid #fff;padding:0;cursor:pointer;box-shadow:3px 3px 0 #000;transition:transform .15s}
+.sw button.on{outline:4px solid var(--y);outline-offset:2px;transform:scale(1.1)}
 .uf{display:inline-block;background:var(--b);color:#fff;font:11px "Archivo Black",sans-serif;padding:4px 8px;border:2px solid var(--ln);margin:6px 6px 0 0;letter-spacing:.06em;transform:rotate(-2deg)}
 .hero>.sticker{animation:flt 3.6s ease-in-out infinite}
+@keyframes gl{0%{transform:none;filter:none;clip-path:none;opacity:1}12%{transform:translate(-3px,1px) skewX(2deg);filter:hue-rotate(40deg)}24%{transform:translate(4px,0);clip-path:inset(12% 0 62% 0)}36%{transform:translate(-2px,1px);clip-path:none;filter:saturate(1.6)}48%{transform:translate(3px,-1px) skewX(-2deg);clip-path:inset(55% 0 20% 0)}60%{transform:none;clip-path:none;filter:hue-rotate(-30deg);opacity:.9}80%{transform:translate(-2px,0);opacity:.6;filter:none}100%{transform:none;opacity:0}}
+@keyframes gl2{0%{opacity:0;transform:translateX(-4px);filter:hue-rotate(60deg)}30%{opacity:1;clip-path:inset(0 0 70% 0);transform:translateX(3px)}55%{clip-path:none;transform:translateX(-2px);filter:saturate(1.5)}100%{filter:none;transform:none}}
+.glitch{animation:gl .6s steps(1) forwards;pointer-events:none}
+.glitch *{text-shadow:2px 0 rgba(255,76,131,.7),-2px 0 rgba(36,85,232,.7)}
+.gin{animation:gl2 .5s steps(1) both}
 .hint{font-size:12px;color:var(--mut);text-align:center}
 .toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translate(-50%,30px);background:#171717;color:#fff;padding:12px 18px;border:2px solid var(--y);font-weight:700;font-size:14px;opacity:0;transition:.3s;pointer-events:none;z-index:99;max-width:90vw;text-align:center}
 .toast.on{opacity:1;transform:translate(-50%,0)}
@@ -112,13 +119,13 @@ footer{font-size:11px;line-height:1.5;color:var(--mut);margin-top:20px}
 <header><div class="brand" id="home" role="button" tabindex="0" aria-label="Voltar ao início" style="cursor:pointer"><div class="mark">✳</div>TRAMPO EM JOGO</div><div class="note">Informação também<br>é ferramenta de luta.</div></header>
 
 <section id="intro">
- <div class="hero"><span class="kicker">Saúde do trabalhador · Nível difícil</span>
+ <div class="hero"><span class="kicker">Saúde do trabalhador</span>
  <h1>Quem move a cidade <span>precisa de cuidado.</span></h1>
  <p class="lead">Catadores, garis, ambulantes, trabalhadoras domésticas e profissionais da construção civil enfrentam situações em que “bom senso” não basta. Você consegue interpretar?</p>
  <div class="sticker">TRABALHO<br>DIGNO<br>JÁ!</div></div>
  <div class="panel">
   <h2 class="ptitle">12 situações. 4 alternativas. 1 leitura certa.</h2>
-  <p class="copy">As alternativas parecem todas razoáveis, mas só uma considera precarização, determinantes sociais, políticas públicas, riscos psicossociais e direitos. Leia a explicação após cada resposta. Quem gabarita ganha um card para postar!</p>
+  <p class="copy">As alternativas parecem todas razoáveis, mas só uma considera precarização, determinantes sociais, políticas públicas, riscos psicossociais e direitos. Leia a explicação após cada resposta. Quem acertar 8 ou mais ganha um card para postar!</p>
   <button class="btn p" id="start">Bora jogar →</button>
   <button class="btn" id="share0">↗ Compartilhar jogo</button>
   <button class="btn y" id="inv">🖼️ Imagem de divulgação (Stories)</button>
@@ -158,7 +165,7 @@ footer{font-size:11px;line-height:1.5;color:var(--mut);margin-top:20px}
 <footer>Jogo educativo. Riscos e direitos variam conforme a atividade, o território e o vínculo. Não substitui avaliação técnica, orientação de serviços de saúde ou assessoria jurídica.</footer>
 </main>
 <div class="toast" id="toast"></div>
-<div class="ov hidden" id="ov" role="dialog" aria-label="Imagem para compartilhar"><img id="img" alt="Imagem para compartilhar nas redes"><p class="hint" style="color:#f4efdf;max-width:420px">Dica: nos Stories, coloque o sticker de link sobre a caixa branca.</p><button class="btn p" id="dl">⬇ Baixar imagem (alta qualidade)</button><button class="btn y" id="si">↗ Compartilhar imagem</button><button class="btn" id="cl">Fechar</button></div>
+<div class="ov hidden" id="ov" role="dialog" aria-label="Imagem para compartilhar"><img id="img" alt="Imagem para compartilhar nas redes"><p class="hint" style="color:#f4efdf;margin:10px 0 0">Escolha as cores da arte</p><div class="sw" id="sw"></div><p class="hint" id="oh" style="color:#f4efdf;max-width:420px">Dica: nos Stories, coloque o sticker de link sobre a caixa branca. O endereço do site também está escrito na imagem.</p><button class="btn p" id="dl">⬇ Baixar imagem (alta qualidade)</button><button class="btn y" id="si">↗ Compartilhar imagem</button><button class="btn" id="cl">Fechar</button></div>
 <script>
 // Em cada item a alternativa correta é sempre a primeira (o jogo embaralha).
 const bank=[
@@ -199,7 +206,7 @@ e:"Quando o ganho (ir embora mais cedo, prêmio) depende de ser rápido, o risco
 o:["A falta de sanitário e água na rota e o desprezo social são fatores de adoecimento físico e mental; garantir pontos de apoio faz parte da organização do serviço e do contrato.","Restringir líquidos é uma adaptação razoável, bastando que ela se programe melhor.","A infecção é problema pessoal de higiene; a empresa só precisa fornecer uniforme.","Sentir-se invisível é questão subjetiva, sem relação com as condições de trabalho."],
 e:"Beber pouco para evitar o banheiro é uma adaptação forçada pela falta de estrutura e pode favorecer infecção urinária e desidratação. O desrespeito cotidiano e a invisibilidade social também afetam a saúde mental. A resposta está na organização e no contrato do serviço: pontos de apoio com sanitário, água e descanso, além de reconhecimento e participação dos trabalhadores."}
 ];
-const N=bank.length;
+const N=bank.length,SITE="https://sdeiros.github.io/SaudeDoTrabalhador/",SHOW="sdeiros.github.io/SaudeDoTrabalhador";
 const W={"Garis · Coleta e ritmo de trabalho":"As outras culpam o indivíduo, naturalizam o risco ou isolam o problema em uma pessoa só. Não enxergam que metas, prêmios e rotas moldam o comportamento no trabalho.","Garis · Sanitários e reconhecimento":"As outras tratam a situação como escolha ou falha individual (higiene, planejamento) ou negam o sofrimento. Não olham para a ausência de sanitário e água, nem para o reconhecimento social do trabalho.","Catadores · Organização do trabalho":"As outras alternativas colocam a culpa no catador (desatenção, seguro próprio) ou só tratam o corte depois. Ignoram que o perigo entra no processo por falhas de coleta e estrutura.",
 "Ambulantes · Calor e território":"As outras tratam o mal-estar como fraqueza pessoal, mascaram o sinal com energético ou negam o direito por ser trabalho por conta própria. Todas ignoram a falta de sombra, água e banheiro.",
 "Trabalho doméstico · Vínculo e saúde":"As outras confundem duas coisas: investigar a relação doença-trabalho no SUS (não exige carteira) e reconhecer vínculo e direitos. Também naturalizam a dor como algo sem relação com as tarefas.",
@@ -214,7 +221,7 @@ const $=s=>document.querySelector(s),RM=matchMedia('(prefers-reduced-motion: red
 const sh=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
 let Q=[],i=0,hits=0,pts=0,streak=0,best=0,done=false,cur=null,imgBlob=null,ans=0,res=[];
 const L="ABCD";
-function show(id){["intro","game","result"].forEach(x=>$("#"+x).classList.toggle("hidden",x!==id));scrollTo({top:0,behavior:RM?"auto":"smooth"});anim($("#"+id),[{opacity:0,transform:"translateY(28px) scale(.97)"},{opacity:1,transform:"none"}],{duration:520,easing:"cubic-bezier(.2,.8,.2,1)"})}
+function show(id){["intro","game","result"].forEach(x=>$("#"+x).classList.toggle("hidden",x!==id));scrollTo({top:0,behavior:RM?"auto":"smooth"});if(id==="intro")introMotion();else anim($("#"+id),[{opacity:0,transform:"translateY(28px) scale(.97)"},{opacity:1,transform:"none"}],{duration:520,easing:"cubic-bezier(.2,.8,.2,1)"})}
 function anim(el,kf,o){if(!RM&&el.animate)el.animate(kf,o)}
 function toast(t){const e=$("#toast");e.textContent=t;e.classList.add("on");setTimeout(()=>e.classList.remove("on"),2400)}
 function count(el,to,fmt,d=900){if(RM){el.innerHTML=fmt(to);return}const t0=performance.now();(function f(t){const p=Math.min(1,(t-t0)/d),v=Math.round(to*(1-Math.pow(1-p,3)));el.innerHTML=fmt(v);if(p<1)requestAnimationFrame(f)})(t0)}
@@ -222,7 +229,7 @@ function confetti(x,y,n=16){if(RM)return;const c=["#f2e92e","#ff4c83","#2455e8",
 function start(){Q=sh(bank).map(b=>({...b,opts:sh(b.o.map((t,k)=>({t,ok:k===0})))}));i=hits=pts=streak=best=ans=0;res=[];$("#pts").textContent="0 PTS";show("game");render()}
 function render(){done=false;const b=Q[i];$("#cnt").textContent=`Situação ${String(i+1).padStart(2,"0")} / ${N}`;
  $("#fill").style.width=(i/N*100)+"%";$("#cat").textContent=b.c;$("#q").textContent=b.q;$("#ask").textContent=b.a;
- $("#fb").classList.add("hidden");$("#next").classList.add("hidden");
+ $("#fb").classList.add("hidden");$("#next").classList.add("hidden");$("#quit").classList.toggle("hidden",i===N-1);$("#quit").textContent="✋ Encerrar jogo";delete $("#quit").dataset.s;
  const box=$("#opts");box.innerHTML="";
  b.opts.forEach((o,k)=>{const x=document.createElement("button");x.className="opt";x.innerHTML=`<i>${L[k]}</i><span></span>`;x.lastChild.textContent=o.t;x.onclick=()=>pick(k,x);box.appendChild(x);anim(x,[{opacity:0,transform:"translateY(18px)"},{opacity:1,transform:"none"}],{duration:420,delay:140+k*70,easing:"cubic-bezier(.2,.8,.2,1)",fill:"backwards"})});
  anim($("#card"),[{opacity:0,transform:"translateX(46px)"},{opacity:1,transform:"none"}],{duration:450,easing:"cubic-bezier(.2,.8,.2,1)"})}
@@ -239,53 +246,65 @@ function pick(k,btn){if(done)return;done=true;const b=Q[i],ok=b.opts[k].ok,all=[
  const n=$("#next");n.textContent=i===N-1?"Ver resultado 🏁":"Próxima →";n.classList.remove("hidden");
  setTimeout(()=>n.scrollIntoView({behavior:RM?"auto":"smooth",block:"center"}),350)}
 $("#next").onclick=()=>{if(i<N-1){i++;render();scrollTo({top:0,behavior:RM?"auto":"smooth"})}else end()};
-function end(){if(!ans){show("intro");toast("Jogo encerrado. Volte quando quiser! ✊🏽");return}const t=ans<N?["JOGO ENCERRADO","Parada estratégica","Você respondeu "+ans+" de "+N+" situações e acertou "+hits+". Quando quiser, volte e tente completar!"]:hits===N?["GABARITOU!","Você é referência em saúde do trabalhador","Nenhuma situação passou batido: você leu o contexto, os direitos e as condições de trabalho. Gere seu card de vitória!"]:hits>=N-2?["QUASE LÁ!","Leitura crítica afiada","Você enxerga bem além do bom senso. Revise as explicações das que escaparam e tente gabaritar."]:hits>=Math.ceil(N/2)?["BOM CAMINHO","Entendimento em construção","Você acertou boa parte, mas algumas situações pedem uma leitura mais estrutural. A revisão ajuda."]:["PARTICIPAÇÃO CONTA!","Hora de revisar o olhar","Essas situações são difíceis de propósito. Leia a revisão e jogue de novo com a lente da precarização."];
+function end(){if(!ans){show("intro");toast("Jogo encerrado. Volte quando quiser! ✊🏽");return}const t=ans<N?["JOGO ENCERRADO","Parada estratégica","Você respondeu "+ans+" de "+N+" situações e acertou "+hits+". Quando quiser, volte e tente completar!"]:hits===N?["GABARITOU!","Você é referência em saúde do trabalhador","Nenhuma situação passou batido: você leu o contexto, os direitos e as condições de trabalho. Gere seu card de vitória!"]:hits>=8?["QUASE LÁ!","Leitura crítica afiada","Você enxerga bem além do bom senso. Revise as explicações das que escaparam, gere seu card e tente gabaritar!"]:hits>=Math.ceil(N/2)?["BOM CAMINHO","Entendimento em construção","Você acertou boa parte, mas algumas situações pedem uma leitura mais estrutural. A revisão ajuda."]:["PARTICIPAÇÃO CONTA!","Hora de revisar o olhar","Essas situações são difíceis de propósito. Leia a revisão e jogue de novo com a lente da precarização."];
  show("result");$("#rs").textContent=t[0];$("#rt").textContent=t[1];$("#rc").textContent=t[2];
  count($("#big"),hits,v=>`${v}<small>/${ans}</small>`,1100);count($("#rh"),hits,String);count($("#rp"),pts,String,1200);$("#rs2").textContent=best;
  anim($("#rs"),[{transform:"scale(3) rotate(-14deg)",opacity:0},{transform:"scale(1) rotate(-4deg)",opacity:1}],{duration:600,easing:"cubic-bezier(.2,1.4,.4,1)"});
- const gab=hits===N;$("#gc").disabled=!gab;$("#gh").textContent=gab?"🏆 Card liberado! Digite seu nome acima.":"🔒 O card 3x4 é liberado com "+N+"/"+N+". Tente de novo!";
+ const gab=hits>=8;$("#gc").disabled=!gab;$("#gh").textContent=gab?"🏆 Card liberado! Digite seu nome acima.":"🔒 O card 3x4 é liberado com 8 acertos ou mais. Tente de novo!";
  $("#ov").classList.add("hidden");
  $("#rev").innerHTML=Q.slice(0,ans).map((b,n)=>{const r=res[n];return `<details class="ri ${r.ok?"y":"n"}"${r.ok?"":" open"}><summary><b>${r.ok?"✓":"✕"}</b> ${n+1}. ${b.c}</summary><p>${b.q}</p>${r.ok?"":`<p class="w"><b>Você marcou:</b> ${r.ch}</p>`}<p class="g"><b>Resposta certa:</b> ${b.opts.find(o=>o.ok).t}</p>${r.ok?"":`<p><b>Por que você errou:</b> ${W[b.c]}</p>`}<p><b>Por que a certa é a certa:</b> ${b.e}</p></details>`}).join("");
  if(gab)setTimeout(()=>{for(let k=0;k<5;k++)setTimeout(()=>confetti(innerWidth*Math.random(),innerHeight*.35,28),k*250)},500)}
-async function shareGame(){const d={title:"Trampo em Jogo",text:"Encare 12 situações difíceis sobre saúde do trabalhador. Será que você gabarita? ✊🏽",url:location.href};
+async function shareGame(){const d={title:"Trampo em Jogo",text:"Encare 12 situações difíceis sobre saúde do trabalhador. Será que você gabarita? ✊🏽",url:SITE};
  if(navigator.share){try{await navigator.share(d);return}catch(e){if(e.name==="AbortError")return}}
  try{await navigator.clipboard.writeText(d.url);toast("Link copiado! Cole onde quiser 🔗")}catch(e){const t=document.createElement("input");t.value=d.url;document.body.appendChild(t);t.select();try{document.execCommand("copy");toast("Link copiado! 🔗")}catch(_){prompt("Copie o link:",d.url)}t.remove()}}
 ["share0","share1"].forEach(x=>$("#"+x).onclick=shareGame);
 function wrap(c,t,x,y,w,lh){const ws=t.split(" ");let l="";for(const s of ws){const m=l?l+" "+s:s;if(c.measureText(m).width>w&&l){c.fillText(l,x,y);y+=lh;l=s}else l=m}c.fillText(l,x,y);return y+lh}
 async function make(kind){try{await document.fonts.load('80px "Archivo Black"')}catch(e){}
  const W=1080,H=kind==="card"?1440:1920,cv=document.createElement("canvas");cv.width=W*2;cv.height=H*2;const c=cv.getContext("2d");c.scale(2,2);const F='"Archivo Black",Impact,sans-serif',S='"Space Grotesk",Arial,sans-serif',nm=$("#nm").value.trim();
- c.fillStyle=kind==="card"?"#2455e8":"#f2e92e";c.fillRect(0,0,W,H);c.fillStyle="rgba(23,23,23,.12)";for(let x=20;x<W;x+=40)for(let y=20;y<H;y+=40){c.beginPath();c.arc(x,y,3,0,7);c.fill()}
- const box=(x,y,w,h,f)=>{c.fillStyle="#171717";c.fillRect(x+14,y+14,w,h);c.fillStyle=f;c.fillRect(x,y,w,h);c.lineWidth=6;c.strokeStyle="#171717";c.strokeRect(x,y,w,h)};
- c.textAlign="center";const cred=(y0,col)=>{c.fillStyle=col;c.font=`700 18px ${S}`;c.fillText("DESENVOLVIDO POR GRADUANDAS DO 1º PERÍODO DE ENFERMAGEM",540,y0+30);c.font=`21px ${F}`;c.fillText("UNIVERSIDADE FEDERAL DO RIO DE JANEIRO · UFRJ",540,y0+60);c.font=`600 17px ${S}`;c.fillText("Gabriele C. O. dos Santos · Laís M. O. S. Sawaki",540,y0+86);c.fillText("Yasmin Medeiros da Silva · Yris dos Santos Bonfim",540,y0+110)};c.fillStyle="#171717";let y=kind==="card"?110:170;
- if(kind==="card"){box(90,y-30,900,1020,"#fffdf6");c.fillStyle="#ff4c83";c.save();c.translate(540,y+70);c.rotate(-.05);c.font=`72px ${F}`;c.fillText("GABARITEI!",0,0);c.restore();
-  c.fillStyle="#171717";c.font=`300px ${F}`;c.fillText(N+"/"+N,540,y+390);c.font=`34px ${S}`;c.font=`700 38px ${S}`;c.fillText("situações difíceis de saúde do trabalhador",540,y+460);
+ const T=TH[thI];c.fillStyle=T.bg;c.fillRect(0,0,W,H);c.fillStyle=T.dot;for(let x=20;x<W;x+=40)for(let y=20;y<H;y+=40){c.beginPath();c.arc(x,y,3,0,7);c.fill()}
+ const box=(x,y,w,h,f)=>{c.fillStyle=T.sh;c.fillRect(x+14,y+14,w,h);c.fillStyle=f;c.fillRect(x,y,w,h);c.lineWidth=6;c.strokeStyle=T.sh;c.strokeRect(x,y,w,h)};
+ c.textAlign="center";const big=(t,m,s)=>{for(;s>60;s-=10){c.font=`${s}px ${F}`;if(c.measureText(t).width<=m)break}};const cred=(y0,col)=>{c.fillStyle=col;c.font=`700 18px ${S}`;c.fillText("DESENVOLVIDO POR GRADUANDAS DO 1º PERÍODO DE ENFERMAGEM",540,y0+30);c.font=`21px ${F}`;c.fillText("UNIVERSIDADE FEDERAL DO RIO DE JANEIRO · UFRJ",540,y0+60);c.font=`600 17px ${S}`;c.fillText("Gabriele C. O. dos Santos · Laís M. O. S. Sawaki",540,y0+86);c.fillText("Yasmin Medeiros da Silva · Yris dos Santos Bonfim",540,y0+110)};c.fillStyle=T.tx;let y=kind==="card"?110:170;
+ if(kind==="card"){box(90,y-30,900,1020,"#fffdf6");c.fillStyle="#ff4c83";c.save();c.translate(540,y+70);c.rotate(-.05);big(hits===N?"GABARITEI!":"QUASE GABARITEI!",800,72);c.fillText(hits===N?"GABARITEI!":"QUASE GABARITEI!",0,0);c.restore();
+  c.fillStyle="#171717";big(hits+"/"+N,760,300);c.fillText(hits+"/"+N,540,y+390);c.font=`34px ${S}`;c.font=`700 38px ${S}`;c.fillText("situações difíceis de saúde do trabalhador",540,y+460);
   c.font=`64px ${F}`;c.fillStyle="#2455e8";let yy=wrap(c,(nm||"Seu nome aqui").toUpperCase(),540,y+600,780,76);
   c.fillStyle="#171717";c.font=`700 34px ${S}`;wrap(c,"Pontuação: "+pts+" pts · Maior sequência: "+best,540,yy+30,780,44);
-  c.fillStyle="#171717";c.font=`40px ${F}`;c.fillText("TRAMPO EM JOGO",540,1150);box(90,1185,900,80,"#fffdf6");cred(1312,"#fff")}
- else if(kind==="invite"){c.lineWidth=6;c.strokeStyle="#171717";[["#2455e8",1000,260,420],["#ff4c83",60,1500,520]].forEach(([f,x,yy,r])=>{c.fillStyle=f;c.beginPath();c.arc(x,yy,r,0,7);c.fill();c.stroke()});
-  c.fillStyle="#171717";c.font=`150px ${F}`;c.fillText("TRAMPO",540,380);c.fillText("EM JOGO",540,540);
-  box(90,650,900,520,"#fffdf6");c.fillStyle="#171717";c.font=`700 38px ${S}`;c.fillText("Saúde do trabalhador · nível difícil",540,740);
+  c.fillStyle=T.tx;c.font=`40px ${F}`;c.fillText("TRAMPO EM JOGO",540,1150);box(90,1185,900,80,"#fffdf6");c.fillStyle="#171717";c.font=`700 32px ${S}`;c.fillText(SHOW,540,1236);cred(1312,T.tx)}
+ else if(kind==="invite"){c.lineWidth=6;c.strokeStyle=T.sh;[[T.a2,1000,260,420],[T.a1,60,1500,520]].forEach(([f,x,yy,r])=>{c.fillStyle=f;c.beginPath();c.arc(x,yy,r,0,7);c.fill();c.stroke()});
+  c.fillStyle=T.tx;c.font=`150px ${F}`;c.fillText("TRAMPO",540,380);c.fillText("EM JOGO",540,540);
+  box(90,650,900,520,"#fffdf6");c.fillStyle="#171717";c.font=`700 38px ${S}`;c.fillText("Saúde do trabalhador",540,740);
   c.font=`64px ${F}`;c.fillText(N+" SITUAÇÕES",540,850);c.fillStyle="#2455e8";c.fillText("4 ALTERNATIVAS",540,940);c.fillStyle="#ff4c83";c.fillText("1 LEITURA CERTA",540,1030);
   c.fillStyle="#171717";c.font=`700 32px ${S}`;c.fillText("Catadores, garis, ambulantes,",540,1090);c.fillText("domésticas e construção civil",540,1135);
-  box(90,1290,900,130,"#ff4c83");c.fillStyle="#171717";c.font=`40px ${F}`;c.fillText("SERÁ QUE VOCÊ GABARITA?",540,1373);
-  c.font=`700 30px ${S}`;c.fillText("JOGUE AGORA",540,1500);box(90,1525,900,150,"#fffdf6");cred(H-130,"#171717")}
+  box(90,1290,900,130,T.a1);c.fillStyle="#171717";c.font=`40px ${F}`;c.fillText("SERÁ QUE VOCÊ GABARITA?",540,1373);
+  c.font=`700 30px ${S}`;c.fillStyle=T.tx;c.fillText("JOGUE AGORA",540,1500);box(90,1525,900,150,"#fffdf6");c.fillStyle=T.tx;c.font=`700 30px ${S}`;c.fillText(SHOW,540,1738);cred(H-130,T.tx)}
  else{c.font=`110px ${F}`;c.fillText("TRAMPO",540,y+80);c.fillText("EM JOGO",540,y+200);
-  box(90,y+300,900,820,"#fffdf6");c.fillStyle="#171717";c.font=`700 40px ${S}`;c.fillText((nm?nm+" fez":"Eu fiz"),540,y+400);c.font=`330px ${F}`;c.fillText(hits+"/"+ans,540,y+720);
-  c.font=`56px ${F}`;c.fillStyle="#ff4c83";c.fillText($("#rs").textContent,540,y+830);c.fillStyle="#171717";c.font=`700 38px ${S}`;c.fillText(pts+" pontos · sequência "+best,540,y+920);c.fillText("Saúde do trabalhador · nível difícil",540,y+990);
-  box(90,y+1230,900,130,"#ff4c83");c.fillStyle="#171717";c.font=`40px ${F}`;c.fillText("SERÁ QUE VOCÊ GABARITA?",540,y+1313);c.font=`700 30px ${S}`;c.fillText("JOGUE AGORA",540,1595);box(90,1615,900,120,"#fffdf6");cred(H-130,"#171717")}
+  box(90,y+300,900,820,"#fffdf6");c.fillStyle="#171717";c.font=`700 40px ${S}`;c.fillText((nm?nm+" fez":"Eu fiz"),540,y+400);big(hits+"/"+ans,760,330);c.fillText(hits+"/"+ans,540,y+720);
+  c.font=`56px ${F}`;c.fillStyle="#ff4c83";c.fillText($("#rs").textContent,540,y+830);c.fillStyle="#171717";c.font=`700 38px ${S}`;c.fillText(pts+" pontos · sequência "+best,540,y+920);c.fillText("Saúde do trabalhador",540,y+990);
+  box(90,y+1230,900,130,T.a1);c.fillStyle="#171717";c.font=`40px ${F}`;c.fillText("SERÁ QUE VOCÊ GABARITA?",540,y+1313);c.font=`700 30px ${S}`;c.fillStyle=T.tx;c.fillText("JOGUE AGORA",540,1595);box(90,1615,900,120,"#fffdf6");c.fillStyle=T.tx;c.font=`700 30px ${S}`;c.fillText(SHOW,540,1788);cred(H-130,T.tx)}
  return new Promise(r=>cv.toBlob(b=>r({b,u:URL.createObjectURL(b)}),"image/png"))}
-let imgKind="story";
-async function gen(k){toast("Gerando imagem…");const r=await make(k);imgBlob=r.b;imgKind=k;$("#img").src=r.u;$("#ov").classList.remove("hidden");$("#ov").scrollTop=0;document.body.style.overflow="hidden";anim($("#ov"),[{opacity:0},{opacity:1}],{duration:300});anim($("#img"),[{opacity:0,transform:"scale(.9) rotate(-2deg)"},{opacity:1,transform:"none"}],{duration:500,easing:"cubic-bezier(.2,1.2,.4,1)"})}
+function glitchEnd(){if(RM){end();return}const g=$("#game");g.classList.add("glitch");setTimeout(()=>{g.classList.remove("glitch");end();const r=$("#result");r.classList.add("gin");setTimeout(()=>r.classList.remove("gin"),550)},620)}
+function wrapWords(el){const walk=n=>[...n.childNodes].forEach(c=>{if(c.nodeType===3){const f=document.createDocumentFragment();c.textContent.split(/(\s+)/).forEach(p=>{if(!p.trim()){f.appendChild(document.createTextNode(p));return}const s=document.createElement("span");s.className="mw";s.textContent=p;f.appendChild(s)});c.replaceWith(f)}else if(c.nodeType===1&&c.tagName!=="BR")walk(c)});walk(el)}
+function introMotion(){if(RM)return;const A=(e,kf,o)=>e&&e.animate&&e.animate(kf,{easing:"cubic-bezier(.2,.9,.2,1)",fill:"backwards",...o});
+ A($(".kicker"),[{opacity:0,transform:"translateX(-50px) rotate(-10deg) scale(.8)"},{opacity:1,transform:"rotate(-2deg)"}],{duration:650});
+ document.querySelectorAll("#intro h1 .mw").forEach((w,k)=>A(w,[{opacity:0,transform:"translateY(80%) rotate(7deg) scale(.88)",filter:"blur(7px)"},{opacity:1,transform:"none",filter:"blur(0)"}],{duration:750,delay:200+k*85}));
+ A($(".lead"),[{opacity:0,transform:"translateY(22px)"},{opacity:1,transform:"none"}],{duration:650,delay:750});
+ A($(".sticker"),[{opacity:0,transform:"scale(0) rotate(-140deg)"},{opacity:1,transform:"scale(1) rotate(11deg)"}],{duration:900,delay:950,easing:"cubic-bezier(.2,1.5,.4,1)"});
+ document.querySelectorAll("#intro .panel>*").forEach((e,k)=>A(e,[{opacity:0,transform:"translateY(26px)"},{opacity:1,transform:"none"}],{duration:600,delay:850+k*90}));
+ A($(".mark"),[{transform:"rotate(-180deg) scale(.4)",opacity:0},{transform:"rotate(-5deg) scale(1)",opacity:1}],{duration:800,delay:100,easing:"cubic-bezier(.2,1.4,.4,1)"})}
+let imgKind="story",thI=0,lastUrl=null;
+const TH=[{n:"Clássico",bg:"#f2e92e",a1:"#ff4c83",a2:"#2455e8",tx:"#171717",sh:"#171717",dot:"rgba(23,23,23,.12)"},{n:"Azul",bg:"#2455e8",a1:"#f2e92e",a2:"#ff4c83",tx:"#ffffff",sh:"#171717",dot:"rgba(255,255,255,.14)"},{n:"Rosa",bg:"#ff4c83",a1:"#f2e92e",a2:"#2455e8",tx:"#171717",sh:"#171717",dot:"rgba(23,23,23,.12)"},{n:"Verde",bg:"#b9ed54",a1:"#ff4c83",a2:"#2455e8",tx:"#171717",sh:"#171717",dot:"rgba(23,23,23,.12)"},{n:"Noite",bg:"#171717",a1:"#f2e92e",a2:"#ff4c83",tx:"#f4efdf",sh:"#f4efdf",dot:"rgba(255,255,255,.08)"}];
+TH.forEach((t,n)=>{const b=document.createElement("button");b.style.background=`linear-gradient(135deg,${t.bg} 50%,${t.a1} 50%)`;b.setAttribute("aria-label","Cores: "+t.n);b.title=t.n;b.onclick=()=>{thI=n;draw()};$("#sw").appendChild(b)});
+async function draw(){const r=await make(imgKind);if(lastUrl)URL.revokeObjectURL(lastUrl);lastUrl=r.u;imgBlob=r.b;$("#img").src=r.u;document.querySelectorAll("#sw button").forEach((b,n)=>b.classList.toggle("on",n===thI))}
+async function gen(k){toast("Gerando imagem…");imgKind=k;thI=k==="card"?1:0;$("#oh").style.display=k==="card"?"none":"";await draw();$("#ov").classList.remove("hidden");$("#ov").scrollTop=0;document.body.style.overflow="hidden";anim($("#ov"),[{opacity:0},{opacity:1}],{duration:300});anim($("#img"),[{opacity:0,transform:"scale(.9) rotate(-2deg)"},{opacity:1,transform:"none"}],{duration:500,easing:"cubic-bezier(.2,1.2,.4,1)"})}
 async function dl(){if(!imgBlob)return;const fn="trampo-em-jogo-"+imgKind+".png";let d=null;try{d=window.claude&&await claude.use("downloads")}catch(e){}
  if(d){try{await d.save({filename:fn,data:imgBlob});toast("Imagem salva! ✓")}catch(e){if(e.code!=="declined")toast("Não deu para baixar. Use Compartilhar imagem.")}return}
  const a=document.createElement("a");a.href=$("#img").src;a.download=fn;document.body.appendChild(a);a.click();a.remove();toast("Baixando imagem…")}
 $("#dl").onclick=dl;$("#inv").onclick=()=>gen("invite");$("#cl").onclick=()=>{$("#ov").classList.add("hidden");document.body.style.overflow=""};
-$("#gs").onclick=()=>gen("story");$("#gc").onclick=()=>hits===N&&gen("card");
-$("#si").onclick=async()=>{const f=new File([imgBlob],"trampo-em-jogo.png",{type:"image/png"}),d={files:[f],title:"Trampo em Jogo",text:"Joguei Trampo em Jogo! "+location.href};
+$("#gs").onclick=()=>gen("story");$("#gc").onclick=()=>hits>=8&&gen("card");
+$("#si").onclick=async()=>{const f=new File([imgBlob],"trampo-em-jogo.png",{type:"image/png"}),d={files:[f],title:"Trampo em Jogo",text:"Joguei Trampo em Jogo! "+SITE};
  if(navigator.canShare&&navigator.canShare({files:[f]})){try{await navigator.share(d);return}catch(e){if(e.name==="AbortError")return}}toast("Segure a imagem para salvar e poste nas redes 📲")};
-let qt;$("#quit").onclick=function(){if(this.dataset.s){clearTimeout(qt);delete this.dataset.s;this.textContent="✋ Encerrar jogo";end();return}this.dataset.s=1;this.textContent="Toque de novo para encerrar";qt=setTimeout(()=>{delete this.dataset.s;this.textContent="✋ Encerrar jogo"},3000)};
+let qt;$("#quit").onclick=function(){if(this.dataset.s){clearTimeout(qt);delete this.dataset.s;this.textContent="✋ Encerrar jogo";glitchEnd();return}this.dataset.s=1;this.textContent="Toque de novo para encerrar";qt=setTimeout(()=>{delete this.dataset.s;this.textContent="✋ Encerrar jogo"},3000)};
 const home=()=>{$("#ov").classList.add("hidden");document.body.style.overflow="";show("intro")};$("#home").onclick=home;$("#home").onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();home()}};
-$("#start").onclick=start;$("#again").onclick=start;
+$("#start").onclick=start;$("#again").onclick=start;wrapWords($("#intro h1"));introMotion();
 </script>
 </body>
 </html>
