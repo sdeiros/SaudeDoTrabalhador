@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f2e92e">
+<title>Trampo em Jogo — Saúde do Trabalhador</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4efdf;--panel:#fffdf6;--fg:#171717;--mut:#5e5a50;--ln:#171717;--y:#f2e92e;--p:#ff4c83;--b:#2455e8;--g:#b9ed54;--on:#171717;--ok:#d9f5a9;--ko:#ffd9e4;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{color-scheme:light}
+.shell{position:relative;z-index:1}
+.fx{position:fixed;bottom:-60px;font-size:30px;opacity:.16;pointer-events:none;z-index:0;animation:drift linear infinite}
+@keyframes drift{to{transform:translateY(-115vh) rotate(40deg)}}
+@keyframes flt{0%,100%{transform:rotate(11deg) translateY(0)}50%{transform:rotate(6deg) translateY(-9px)}}
+@keyframes wob{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg) scale(1.08)}}
+@keyframes up{from{opacity:0;transform:translateY(26px)}}
+@keyframes beat{0%,100%{transform:scale(1)}50%{transform:scale(1.035)}}
+@keyframes sh{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
+.sticker{animation:flt 3.6s ease-in-out infinite}
+.mark{animation:wob 3.2s ease-in-out infinite}
+.hero>*{animation:up .7s cubic-bezier(.2,.8,.2,1) backwards}
+.hero>h1{animation-delay:.12s}.hero>.lead{animation-delay:.24s}
+#intro .panel{animation:up .7s .35s cubic-bezier(.2,.8,.2,1) backwards}
+#start{animation:beat 1.8s ease-in-out infinite}
+.fill{position:relative}
+.fill:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.75),transparent);animation:sh 1.5s linear infinite}
+.stamp{animation:wob 2.4s ease-in-out infinite}
+.pts{transition:transform .3s}
+.btn.q{background:transparent;box-shadow:none;border-style:dashed;min-height:48px;font-size:13px}
+@media(hover:hover){.opt:hover:not(:disabled){transform:translate(-2px,-2px);box-shadow:5px 5px 0 var(--ln)}.btn:hover:not(:disabled){transform:translate(-2px,-2px);box-shadow:5px 5px 0 var(--ln)}}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:"Space Grotesk",Arial,sans-serif;overflow-x:hidden;min-height:100vh}
+button{font:inherit;color:inherit}
+.shell{width:min(760px,100% - 24px);margin:auto;padding:14px 0 40px}
+header{display:flex;justify-content:space-between;align-items:center;gap:10px;border-bottom:3px solid var(--ln);padding-bottom:10px}
+.brand{display:flex;align-items:center;gap:9px;font:clamp(14px,4.4vw,17px) "Archivo Black",sans-serif}
+.mark{width:34px;height:34px;background:var(--p);border:2px solid var(--ln);display:grid;place-items:center;transform:rotate(-5deg);color:var(--on)}
+.note{font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;text-align:right}
+.hidden{display:none!important}
+h1,h2,h3,p{margin-top:0}
+.kicker{display:inline-block;background:var(--b);color:#fff;padding:6px 10px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;transform:rotate(-2deg);border:2px solid var(--ln);margin-top:22px}
+h1{font:clamp(38px,12.5vw,76px)/.93 "Archivo Black",Impact,sans-serif;text-transform:uppercase;letter-spacing:-.05em;margin:14px 0 12px}
+h1 span{color:var(--p);-webkit-text-stroke:1px var(--ln);text-shadow:3px 3px 0 var(--ln)}
+.lead{font-size:clamp(15px,4vw,17px);line-height:1.5;font-weight:600}
+.panel{background:var(--panel);border:3px solid var(--ln);box-shadow:5px 5px 0 var(--ln);padding:clamp(16px,5vw,30px);margin-top:18px;position:relative}
+.ptitle{font:clamp(22px,6.5vw,32px)/1.02 "Archivo Black",sans-serif;text-transform:uppercase;margin-bottom:10px}
+.copy{line-height:1.6;font-size:15px}
+.btn{width:100%;min-height:56px;border:2px solid var(--ln);box-shadow:3px 3px 0 var(--ln);padding:14px 16px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;cursor:pointer;transition:transform .12s,box-shadow .12s;background:var(--panel);margin-top:12px;font-size:15px}
+.btn:active{transform:translate(3px,3px);box-shadow:0 0 0}
+.btn:focus-visible,.opt:focus-visible{outline:3px dashed var(--b);outline-offset:3px}
+.btn.p{background:var(--p);color:var(--on)}.btn.d{background:#171717;color:#fff}.btn.y{background:var(--y);color:var(--on)}
+.btn:disabled{opacity:.55;cursor:not-allowed}
+.stats3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:16px 0 6px}
+.stats3 div{border:2px solid var(--ln);padding:10px 4px;text-align:center;font-size:11px;font-weight:700;text-transform:uppercase}
+.stats3 b{display:block;font:24px "Archivo Black"}
+.credits{font-size:13px;line-height:1.55;border-top:2px dashed var(--ln);margin-top:16px;padding-top:12px;color:var(--mut)}
+.credits b{color:var(--fg)}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px}
+.cnt{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.pts{font:15px "Archivo Black";background:var(--y);color:var(--on);border:2px solid var(--ln);padding:6px 10px;transform:rotate(2deg)}
+.bar{height:14px;border:2px solid var(--ln);overflow:hidden;margin-bottom:16px;background:var(--panel)}
+.fill{height:100%;width:0;background:repeating-linear-gradient(135deg,var(--p) 0 8px,var(--y) 8px 16px);transition:width .6s cubic-bezier(.2,.8,.2,1)}
+.cat{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:var(--g);color:var(--on);padding:5px 8px;border:2px solid var(--ln);margin-bottom:12px}
+.q{font-size:clamp(15.5px,4.3vw,19px);line-height:1.5;font-weight:600;margin-bottom:6px}
+.ask{font:clamp(18px,5.4vw,24px)/1.15 "Archivo Black",sans-serif;margin:14px 0 16px;letter-spacing:-.02em}
+.opts{display:grid;gap:11px}
+.opt{display:flex;gap:12px;align-items:flex-start;text-align:left;min-height:64px;padding:13px;background:var(--panel);border:2px solid var(--ln);box-shadow:3px 3px 0 var(--ln);cursor:pointer;font-size:clamp(14px,3.9vw,16px);line-height:1.4;font-weight:600;transition:background .2s,transform .12s}
+.opt i{flex:none;width:30px;height:30px;border:2px solid var(--ln);background:var(--y);color:var(--on);display:grid;place-items:center;font:14px "Archivo Black";font-style:normal}
+.opt:active:not(:disabled){transform:translate(2px,2px)}
+.opt:disabled{cursor:default}
+.opt.ok{background:var(--ok);outline:3px solid #26804d}.opt.ok i{background:#26804d;color:#fff}
+.opt.ko{background:var(--ko);outline:3px solid #c03e61}.opt.ko i{background:#c03e61;color:#fff}
+.opt.dim{opacity:.55}
+.fb{margin-top:16px;border:2px solid var(--ln);padding:15px;background:var(--bg)}
+.fb h3{font:17px "Archivo Black";margin-bottom:8px}.fb p{font-size:14.5px;line-height:1.6;margin-bottom:0}
+.stamp{display:inline-block;font:13px "Archivo Black";background:var(--p);color:var(--on);border:2px solid var(--ln);padding:6px 10px;text-transform:uppercase;transform:rotate(-4deg)}
+.big{font:clamp(64px,22vw,120px)/1 "Archivo Black";margin:10px 0 0}
+.big small{font-size:.35em;opacity:.6}
+.rev{margin-top:14px;display:grid;gap:6px;font-size:13px}
+.rev div{display:flex;gap:8px;align-items:flex-start;border-bottom:1px dashed var(--ln);padding:6px 0}
+.rev b{flex:none}
+input{width:100%;min-height:50px;font:inherit;font-size:16px;padding:10px 12px;border:2px solid var(--ln);background:var(--panel);color:var(--fg);margin-top:8px}
+.prev{width:100%;display:block;border:3px solid var(--ln);box-shadow:5px 5px 0 var(--ln);margin:12px 0}
+.ri{border:2px solid var(--ln);background:var(--bg);padding:10px 12px}
+.ri summary{cursor:pointer;font-weight:700;font-size:13px;line-height:1.4}
+.ri p{font-size:13.5px;line-height:1.55;margin:9px 0 0}
+.ri .w{background:var(--ko);padding:8px;border-left:5px solid #c03e61}
+.ri .g{background:var(--ok);padding:8px;border-left:5px solid #26804d}
+.hint{font-size:12px;color:var(--mut);text-align:center}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translate(-50%,30px);background:#171717;color:#fff;padding:12px 18px;border:2px solid var(--y);font-weight:700;font-size:14px;opacity:0;transition:.3s;pointer-events:none;z-index:99;max-width:90vw;text-align:center}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.cf{position:fixed;width:9px;height:9px;pointer-events:none;z-index:98}
+footer{font-size:11px;line-height:1.5;color:var(--mut);margin-top:20px}
+.sticker{position:absolute;right:-4px;top:-26px;width:84px;height:84px;background:var(--y);color:var(--on);border:3px solid var(--ln);border-radius:50%;display:grid;place-items:center;text-align:center;font:11px/1.1 "Archivo Black";transform:rotate(11deg)}
+.hero{position:relative}
+@media(min-width:620px){.opts{grid-template-columns:1fr 1fr}.btn{width:auto;min-width:260px}.sticker{width:110px;height:110px;font-size:14px;top:10px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div aria-hidden="true"><span class="fx" style="left:6%;animation-duration:19s">✊🏽</span><span class="fx" style="left:24%;animation-duration:26s;animation-delay:-8s">♻️</span><span class="fx" style="left:45%;animation-duration:22s;animation-delay:-14s">🧱</span><span class="fx" style="left:63%;animation-duration:28s;animation-delay:-4s">🧹</span><span class="fx" style="left:82%;animation-duration:21s;animation-delay:-11s">🛒</span></div>
+<main class="shell">
+<header><div class="brand"><div class="mark">✳</div>TRAMPO EM JOGO</div><div class="note">Informação também<br>é ferramenta de luta.</div></header>
+
+<section id="intro">
+ <div class="hero"><span class="kicker">Saúde do trabalhador · Nível difícil</span>
+ <h1>Quem move a cidade <span>precisa de cuidado.</span></h1>
+ <p class="lead">Catadores, ambulantes, trabalhadoras domésticas e profissionais da construção civil enfrentam situações em que “bom senso” não basta. Você consegue interpretar?</p>
+ <div class="sticker">TRABALHO<br>DIGNO<br>JÁ!</div></div>
+ <div class="panel">
+  <h2 class="ptitle">10 situações. 4 alternativas. 1 leitura certa.</h2>
+  <p class="copy">As alternativas parecem todas razoáveis, mas só uma considera precarização, determinantes sociais, políticas públicas, riscos psicossociais e direitos. Leia a explicação após cada resposta. Quem gabarita ganha um card para postar!</p>
+  <button class="btn p" id="start">Bora jogar →</button>
+  <button class="btn" id="share0">↗ Compartilhar jogo</button>
+  <div class="credits"><b>Desenvolvido por:</b><br>Gabriele Cristina de Oliveira dos Santos<br>Laís Midori de Oliveira Sant’ana Sawaki<br>Yasmin Medeiros da Silva<br>Yris dos Santos Bonfim</div>
+ </div>
+</section>
+
+<section id="game" class="panel hidden" aria-live="polite">
+ <div class="top"><div class="cnt" id="cnt"></div><div class="pts" id="pts">0 PTS</div></div>
+ <div class="bar"><div class="fill" id="fill"></div></div>
+ <div id="card">
+  <span class="cat" id="cat"></span>
+  <p class="q" id="q"></p><h3 class="ask" id="ask"></h3>
+  <div class="opts" id="opts"></div>
+  <div class="fb hidden" id="fb" role="status"><h3 id="fbt"></h3><p id="fbp"></p></div>
+  <button class="btn d hidden" id="next">Próxima →</button>
+  <button class="btn q" id="quit">✋ Encerrar jogo</button>
+ </div>
+</section>
+
+<section id="result" class="panel hidden" aria-live="polite">
+ <span class="stamp" id="rs"></span>
+ <div class="big" id="big">0<small>/10</small></div>
+ <h2 class="ptitle" id="rt" style="margin-top:8px"></h2>
+ <p class="copy" id="rc"></p>
+ <div class="stats3"><div><b id="rh">0</b>acertos</div><div><b id="rp">0</b>pontos</div><div><b id="rs2">0</b>maior sequência</div></div>
+ <button class="btn p" id="share1">↗ Compartilhar jogo</button>
+ <label class="copy" style="display:block;margin-top:16px"><b>Seu nome</b> (aparece nas imagens)<input id="nm" maxlength="40" placeholder="Digite seu nome" autocomplete="name"></label>
+ <button class="btn y" id="gs">📲 Criar imagem para Stories</button>
+ <button class="btn d" id="gc">🏆 Card de gabarito 3x4</button>
+ <p class="hint" id="gh"></p>
+ <div id="imgbox" class="hidden"><img class="prev" id="img" alt="Imagem para compartilhar nas redes"><p class="hint">Toque e segure na imagem para salvar.</p><button class="btn p" id="si">↗ Compartilhar imagem</button></div>
+ <button class="btn" id="again">↻ Jogar outra partida</button>
+ <h3 class="ptitle" style="font-size:18px;margin-top:22px">Revisão</h3><div class="rev" id="rev"></div>
+ <div class="credits"><b>Desenvolvido por:</b> Gabriele Cristina de Oliveira dos Santos, Laís Midori de Oliveira Sant’ana Sawaki, Yasmin Medeiros da Silva e Yris dos Santos Bonfim.</div>
+</section>
+<footer>Jogo educativo. Riscos e direitos variam conforme a atividade, o território e o vínculo. Não substitui avaliação técnica, orientação de serviços de saúde ou assessoria jurídica.</footer>
+</main>
+<div class="toast" id="toast"></div>
+<script>
+// Em cada item a alternativa correta é sempre a primeira (o jogo embaralha).
+const bank=[
+{c:"Catadores · Organização do trabalho",q:"Em uma cooperativa de reciclagem, os cortes e perfurações aumentaram após a chegada de material misturado com cacos e seringas. O gestor propõe luvas mais grossas e um treinamento sobre “atenção redobrada”.",a:"Qual leitura é mais coerente com a saúde do trabalhador?",
+o:["As luvas ajudam, mas o risco nasce da cadeia: separação na origem, esteira e prensa seguras, água, banheiro e participação dos catadores no diagnóstico.","A medida é suficiente: acidente com perfurocortante resulta, em geral, de desatenção individual.","Cada catador deve contratar seguro próprio, já que a cooperativa não é empregadora tradicional.","O problema é do sistema de saúde, que deve tratar os cortes depois que ocorrerem."],
+e:"A perspectiva da saúde do trabalhador desloca o foco da “falha individual” para o processo de trabalho. O perigo entra misturado ao material por falhas a montante (coleta e descarte), e a cooperativa não controla isso sozinha. O EPI é a última barreira, não a primeira: prevenir exige ação coletiva e do poder público, ouvindo quem faz a triagem."},
+{c:"Ambulantes · Calor e território",q:"Em uma onda de calor de 38 °C, um vendedor ambulante sente tontura, dor de cabeça e fraqueza no meio da tarde. Ele diz que “é fraqueza dele” e que precisa aguentar até vender o estoque.",a:"Qual interpretação é mais adequada?",
+o:["São sinais de alerta de estresse térmico; a exposição se agrava pela falta de sombra, água e banheiro, o que pede apoio urbano e não só resistência individual.","É falta de condicionamento físico, resolvida com mais disciplina e hidratação por conta própria.","Energético e café ajudam a manter o ritmo e evitam queda de rendimento.","Como é trabalho por conta própria, não há relação com saúde do trabalhador."],
+e:"Tontura, cefaleia e fraqueza podem indicar exaustão por calor e exigem pausa em local fresco e hidratação. Mas o caso é também social: quem vende na rua depende de sombra, água potável e sanitários que o espaço urbano precisa garantir. Trabalhar por conta própria não retira o direito à proteção, nem a responsabilidade do poder público."},
+{c:"Trabalho doméstico · Vínculo e saúde",q:"Uma diarista com dor lombar crônica, após anos carregando baldes e esfregando pisos, ouve da contratante: “isso não é acidente de trabalho, você nem tem carteira assinada”.",a:"Qual afirmação está mais correta?",
+o:["A relação entre a dor e o trabalho pode ser investigada no SUS mesmo sem registro; já o reconhecimento de vínculo e dos direitos é outra discussão, avaliada pela realidade da relação.","Sem carteira, o SUS não pode registrar nem investigar a relação entre a doença e o trabalho.","Só há doença do trabalho se a pessoa tiver mais de dez anos na mesma casa.","A dor é degenerativa por natureza e não tem relação com as tarefas realizadas."],
+e:"Saúde do trabalhador no SUS não depende de vínculo formal: a pessoa pode relatar a ocupação e as exposições na unidade de saúde e ser acompanhada pela rede, incluindo Cerest. Já os direitos trabalhistas e previdenciários dependem de como a relação ocorre na prática (por exemplo, frequência do serviço), e podem ser discutidos com sindicato ou Defensoria."},
+{c:"Construção civil · Precarização",q:"Uma obra contrata pedreiros por empreitada, com pagamento por produtividade, sem pausas organizadas, e subcontrata a montagem de fôrmas. Depois do novo modelo, as quedas dobraram.",a:"Qual conceito explica melhor o aumento?",
+o:["A organização do trabalho e a remuneração por produção aceleram o ritmo e fragmentam a responsabilidade, o que enfraquece a prevenção.","Os trabalhadores contratados são, em média, mais imprudentes.","Trata-se de azar estatístico, sem relação com a forma de contratar.","Basta exigir capacete e cinto; contratos não interferem em acidentes."],
+e:"A precarização não é só ausência de carteira: inclui terceirização em cadeia, pagamento por produção e metas que empurram o ritmo. Isso reduz o tempo para montar proteções e dilui quem responde por elas. A explicação por “imprudência” esconde o desenho do trabalho que produz o risco."},
+{c:"Construção civil · Riscos químicos",q:"Um trabalhador corta piso de concreto a seco, todos os dias, em local fechado. A empresa entrega máscara descartável de papel e diz que “já cumpriu a norma”.",a:"Qual medida tem prioridade na hierarquia de controle?",
+o:["Reduzir a poeira na fonte (corte úmido, exaustão) e usar respirador adequado apenas como complemento.","Trocar a máscara de papel por uma mais grossa, mantendo o corte a seco.","Fazer rodízio entre trabalhadores para que cada um respire menos tempo.","Realizar exame anual e, se nada aparecer, manter o método."],
+e:"A poeira de concreto pode conter sílica cristalina respirável, que causa doença pulmonar grave, às vezes sem sintoma por anos. O princípio é controlar o perigo na origem antes de proteger o indivíduo. Rodízio apenas distribui a exposição, e exame detecta dano, não o previne."},
+{c:"Trabalho doméstico · Riscos psicossociais",q:"Uma trabalhadora doméstica dorme no local, fica disponível quase 24 horas, é humilhada com frequência e teme perder o emprego e a moradia. Ela apresenta insônia, ansiedade e choro frequente.",a:"Como interpretar o quadro?",
+o:["Como sofrimento ligado a riscos psicossociais (jornada sem limite, assédio, isolamento, dependência econômica), cuja resposta envolve mudar essas condições.","Como característica de personalidade, resolvida com resiliência e terapia individual apenas.","Como ingratidão, pois o emprego inclui moradia.","Como problema que só existe quando há esforço físico intenso."],
+e:"Riscos psicossociais incluem organização do trabalho, relações abusivas e insegurança. A dependência de moradia e renda aumenta a vulnerabilidade e dificulta denunciar. O cuidado individual é importante, mas insuficiente se a fonte do sofrimento continua; limites de jornada e proteção de direitos fazem parte do tratamento."},
+{c:"Catadores · Determinantes sociais",q:"Famílias de catadores vivem perto de um lixão, sem saneamento, com renda instável e acesso irregular à unidade de saúde. A secretaria planeja só uma campanha de lavagem das mãos.",a:"Qual abordagem se alinha aos determinantes sociais da saúde?",
+o:["Articular saúde, assistência, meio ambiente, habitação e inclusão produtiva, com participação dos catadores nas decisões.","Manter a campanha, pois higiene individual é o principal fator.","Aplicar vacinas e considerar o problema resolvido.","Transferir as famílias para outro município sem consulta."],
+e:"Os determinantes sociais (moradia, saneamento, renda, território) moldam o adoecimento mais do que escolhas individuais. Ações isoladas de informação têm alcance limitado quando faltam água e renda. A política precisa ser intersetorial e participativa, reconhecendo os catadores como agentes ambientais e sujeitos de direitos."},
+{c:"Ambulantes · Políticas públicas",q:"Um ambulante procura a UBS com tosse persistente e dermatite. O profissional prescreve o tratamento, mas não pergunta qual é a ocupação nem as condições em que a pessoa trabalha.",a:"Que ação reflete a Política Nacional de Saúde do Trabalhador e da Trabalhadora?",
+o:["Investigar a história ocupacional, notificar se houver suspeita de relação com o trabalho e articular com a vigilância e o Cerest.","Encaminhar direto ao INSS, pois a unidade não trata questões do trabalho.","Tratar só os sintomas, já que a ocupação informal não interessa ao SUS.","Aguardar que o empregador comunique o caso."],
+e:"Perguntar “em que você trabalha?” é parte do cuidado. Sem isso, o adoecimento do trabalho fica invisível nos dados e nas políticas. A atenção básica deve identificar a relação, notificar e acionar a vigilância, inclusive de trabalhadores informais, que não têm empregador que comunique."},
+{c:"Direitos · Primazia da realidade",q:"Um ajudante sofre queda em uma obra. A empresa afirma que ele era “autônomo”, pois assinou um contrato de prestação de serviço, mas ele cumpria horário, recebia ordens do mestre e trabalhava ali havia meses.",a:"Que princípio é central para a análise?",
+o:["Primazia da realidade: importa como a relação funcionava (subordinação, habitualidade, pessoalidade, pagamento), não o rótulo do contrato.","O contrato escrito prevalece sempre, pois expressa a vontade das partes.","Autônomos não têm nenhum direito à proteção em saúde e segurança.","O vínculo só existe após exatos 90 dias de registro formal."],
+e:"No Direito do Trabalho, a forma não pode mascarar a realidade. Se há subordinação e os demais elementos, o vínculo pode ser reconhecido, mesmo com contrato de “autônomo”. A discussão é caso a caso (Justiça do Trabalho, sindicato, Defensoria). Em qualquer cenário, quem se acidenta deve receber atendimento e ter o caso notificado."},
+{c:"Organização coletiva · Participação",q:"Ambulantes de uma feira pedem banheiro e água potável. A prefeitura responde que “isso não é função do município” e cada vendedor passa a improvisar sozinho.",a:"Qual estratégia é mais efetiva e coerente com a saúde do trabalhador?",
+o:["Mapear coletivamente os riscos e levar a demanda a conselho de saúde, vigilância e Ministério Público, transformando o problema individual em pauta pública.","Cada um resolver do seu jeito, para evitar conflito com a prefeitura.","Esperar uma campanha educativa sobre hidratação.","Suspender as vendas até que alguém se manifeste."],
+e:"Problemas compartilhados ganham força quando aparecem como demanda coletiva, com dados e registro. Associações, sindicatos, conselhos de saúde e o Ministério Público são canais legítimos. A organização não substitui o dever do poder público, mas amplia a voz de quem trabalha e torna visível um risco que parecia “natural”."}
+];
+const W={"Catadores · Organização do trabalho":"As outras alternativas colocam a culpa no catador (desatenção, seguro próprio) ou só tratam o corte depois. Ignoram que o perigo entra no processo por falhas de coleta e estrutura.",
+"Ambulantes · Calor e território":"As outras tratam o mal-estar como fraqueza pessoal, mascaram o sinal com energético ou negam o direito por ser trabalho por conta própria. Todas ignoram a falta de sombra, água e banheiro.",
+"Trabalho doméstico · Vínculo e saúde":"As outras confundem duas coisas: investigar a relação doença-trabalho no SUS (não exige carteira) e reconhecer vínculo e direitos. Também naturalizam a dor como algo sem relação com as tarefas.",
+"Construção civil · Precarização":"As outras culpam o trabalhador (imprudência), recorrem ao acaso ou limitam tudo ao EPI. Não enxergam que contratação, pagamento por produção e subcontratação moldam o ritmo e o risco.",
+"Construção civil · Riscos químicos":"As outras mantêm o corte a seco e só mexem na proteção individual, no tempo de exposição ou no diagnóstico tardio. Não eliminam a poeira na origem, que é a prioridade.",
+"Trabalho doméstico · Riscos psicossociais":"As outras tratam o sofrimento como traço pessoal, que resiliência resolveria, ou o negam. Desconsideram jornada sem limite, assédio e dependência de moradia e renda.",
+"Catadores · Determinantes sociais":"As outras focam só em higiene individual, em vacina ou em remover famílias sem ouvi-las. Não atuam sobre moradia, saneamento, renda e participação.",
+"Ambulantes · Políticas públicas":"As outras tratam só o sintoma, passam o problema adiante ou esperam um empregador que não existe. Deixam o adoecimento do trabalho invisível para a vigilância.",
+"Direitos · Primazia da realidade":"As outras dão peso absoluto ao rótulo do contrato, negam proteção a autônomos ou inventam prazo. O que vale é como a relação funcionava na prática.",
+"Organização coletiva · Participação":"As outras mantêm o problema individual e invisível: improvisar sozinho, esperar campanha ou parar de trabalhar. Nenhuma leva a demanda aos espaços públicos."};
+const $=s=>document.querySelector(s),RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const sh=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+let Q=[],i=0,hits=0,pts=0,streak=0,best=0,done=false,cur=null,imgBlob=null,ans=0,res=[];
+const L="ABCD";
+function show(id){["intro","game","result"].forEach(x=>$("#"+x).classList.toggle("hidden",x!==id));scrollTo({top:0,behavior:RM?"auto":"smooth"});anim($("#"+id),[{opacity:0,transform:"translateY(28px) scale(.97)"},{opacity:1,transform:"none"}],{duration:520,easing:"cubic-bezier(.2,.8,.2,1)"})}
+function anim(el,kf,o){if(!RM&&el.animate)el.animate(kf,o)}
+function toast(t){const e=$("#toast");e.textContent=t;e.classList.add("on");setTimeout(()=>e.classList.remove("on"),2400)}
+function count(el,to,fmt,d=900){if(RM){el.innerHTML=fmt(to);return}const t0=performance.now();(function f(t){const p=Math.min(1,(t-t0)/d),v=Math.round(to*(1-Math.pow(1-p,3)));el.innerHTML=fmt(v);if(p<1)requestAnimationFrame(f)})(t0)}
+function confetti(x,y,n=16){if(RM)return;const c=["#f2e92e","#ff4c83","#2455e8","#b9ed54"];for(let k=0;k<n;k++){const d=document.createElement("div");d.className="cf";d.style.cssText=`left:${x}px;top:${y}px;background:${c[k%4]};border-radius:${k%2?"50%":"0"}`;document.body.appendChild(d);const a=Math.random()*6.28,r=60+Math.random()*140;d.animate([{transform:"translate(0,0) rotate(0)",opacity:1},{transform:`translate(${Math.cos(a)*r}px,${Math.sin(a)*r+90}px) rotate(${Math.random()*540}deg)`,opacity:0}],{duration:900+Math.random()*500,easing:"cubic-bezier(.2,.7,.3,1)"}).onfinish=()=>d.remove()}}
+function start(){Q=sh(bank).map(b=>({...b,opts:sh(b.o.map((t,k)=>({t,ok:k===0})))}));i=hits=pts=streak=best=ans=0;res=[];$("#pts").textContent="0 PTS";show("game");render()}
+function render(){done=false;const b=Q[i];$("#cnt").textContent=`Situação ${String(i+1).padStart(2,"0")} / 10`;
+ $("#fill").style.width=(i/10*100)+"%";$("#cat").textContent=b.c;$("#q").textContent=b.q;$("#ask").textContent=b.a;
+ $("#fb").classList.add("hidden");$("#next").classList.add("hidden");
+ const box=$("#opts");box.innerHTML="";
+ b.opts.forEach((o,k)=>{const x=document.createElement("button");x.className="opt";x.innerHTML=`<i>${L[k]}</i><span></span>`;x.lastChild.textContent=o.t;x.onclick=()=>pick(k,x);box.appendChild(x);anim(x,[{opacity:0,transform:"translateY(18px)"},{opacity:1,transform:"none"}],{duration:420,delay:140+k*70,easing:"cubic-bezier(.2,.8,.2,1)",fill:"backwards"})});
+ anim($("#card"),[{opacity:0,transform:"translateX(46px)"},{opacity:1,transform:"none"}],{duration:450,easing:"cubic-bezier(.2,.8,.2,1)"})}
+function pick(k,btn){if(done)return;done=true;const b=Q[i],ok=b.opts[k].ok,all=[...document.querySelectorAll(".opt")];
+ all.forEach((x,n)=>{x.disabled=true;if(b.opts[n].ok)x.classList.add("ok");else if(n===k)x.classList.add("ko");else x.classList.add("dim")});
+ const r=btn.getBoundingClientRect();
+ ans++;res.push({ok,ch:b.opts[k].t});if(ok){hits++;streak++;best=Math.max(best,streak);const g=100+Math.min(streak-1,4)*25;pts+=g;count($("#pts"),pts,v=>v+" PTS",600);
+  anim(all.find((x,n)=>b.opts[n].ok),[{transform:"scale(1)"},{transform:"scale(1.04)"},{transform:"scale(1)"}],{duration:420});
+  anim($("#pts"),[{transform:"rotate(2deg) scale(1)"},{transform:"rotate(-3deg) scale(1.3)"},{transform:"rotate(2deg) scale(1)"}],{duration:500});
+  confetti(r.left+r.width/2,r.top+r.height/2);$("#fbt").textContent=`✓ Leitura certa! +${g} pts`+(streak>1?` · sequência x${streak}`:"")}
+ else{streak=0;anim(btn,[{transform:"translateX(0)"},{transform:"translateX(-9px)"},{transform:"translateX(9px)"},{transform:"translateX(-6px)"},{transform:"translateX(0)"}],{duration:420});$("#fbt").textContent="✕ Vale revisar. A resposta certa está em verde."}
+ $("#fbp").textContent=b.e;$("#fb").classList.remove("hidden");anim($("#fb"),[{opacity:0,transform:"translateY(14px)"},{opacity:1,transform:"none"}],{duration:400});
+ $("#fill").style.width=((i+1)/10*100)+"%";
+ const n=$("#next");n.textContent=i===9?"Ver resultado 🏁":"Próxima →";n.classList.remove("hidden");
+ setTimeout(()=>n.scrollIntoView({behavior:RM?"auto":"smooth",block:"center"}),350)}
+$("#next").onclick=()=>{if(i<9){i++;render();scrollTo({top:0,behavior:RM?"auto":"smooth"})}else end()};
+function end(){if(!ans){show("intro");toast("Jogo encerrado. Volte quando quiser! ✊🏽");return}const t=ans<10?["JOGO ENCERRADO","Parada estratégica","Você respondeu "+ans+" de 10 situações e acertou "+hits+". Quando quiser, volte e tente completar!"]:hits===10?["GABARITOU!","Você é referência em saúde do trabalhador","Nenhuma situação passou batido: você leu o contexto, os direitos e as condições de trabalho. Gere seu card de vitória!"]:hits>=8?["QUASE LÁ!","Leitura crítica afiada","Você enxerga bem além do bom senso. Revise as explicações das que escaparam e tente gabaritar."]:hits>=5?["BOM CAMINHO","Entendimento em construção","Você acertou boa parte, mas algumas situações pedem uma leitura mais estrutural. A revisão ajuda."]:["PARTICIPAÇÃO CONTA!","Hora de revisar o olhar","Essas situações são difíceis de propósito. Leia a revisão e jogue de novo com a lente da precarização."];
+ show("result");$("#rs").textContent=t[0];$("#rt").textContent=t[1];$("#rc").textContent=t[2];
+ count($("#big"),hits,v=>`${v}<small>/${ans}</small>`,1100);count($("#rh"),hits,String);count($("#rp"),pts,String,1200);$("#rs2").textContent=best;
+ anim($("#rs"),[{transform:"scale(3) rotate(-14deg)",opacity:0},{transform:"scale(1) rotate(-4deg)",opacity:1}],{duration:600,easing:"cubic-bezier(.2,1.4,.4,1)"});
+ const gab=hits===10;$("#gc").disabled=!gab;$("#gh").textContent=gab?"🏆 Card liberado! Digite seu nome acima.":"🔒 O card 3x4 é liberado com 10/10. Tente de novo!";
+ $("#imgbox").classList.add("hidden");
+ $("#rev").innerHTML=Q.slice(0,ans).map((b,n)=>{const r=res[n];return `<details class="ri ${r.ok?"y":"n"}"${r.ok?"":" open"}><summary><b>${r.ok?"✓":"✕"}</b> ${n+1}. ${b.c}</summary><p>${b.q}</p>${r.ok?"":`<p class="w"><b>Você marcou:</b> ${r.ch}</p>`}<p class="g"><b>Resposta certa:</b> ${b.opts.find(o=>o.ok).t}</p>${r.ok?"":`<p><b>Por que você errou:</b> ${W[b.c]}</p>`}<p><b>Por que a certa é a certa:</b> ${b.e}</p></details>`}).join("");
+ if(gab)setTimeout(()=>{for(let k=0;k<5;k++)setTimeout(()=>confetti(innerWidth*Math.random(),innerHeight*.35,28),k*250)},500)}
+async function shareGame(){const d={title:"Trampo em Jogo",text:"Encare 10 situações difíceis sobre saúde do trabalhador. Será que você gabarita? ✊🏽",url:location.href};
+ if(navigator.share){try{await navigator.share(d);return}catch(e){if(e.name==="AbortError")return}}
+ try{await navigator.clipboard.writeText(d.url);toast("Link copiado! Cole onde quiser 🔗")}catch(e){const t=document.createElement("input");t.value=d.url;document.body.appendChild(t);t.select();try{document.execCommand("copy");toast("Link copiado! 🔗")}catch(_){prompt("Copie o link:",d.url)}t.remove()}}
+["share0","share1"].forEach(x=>$("#"+x).onclick=shareGame);
+function wrap(c,t,x,y,w,lh){const ws=t.split(" ");let l="";for(const s of ws){const m=l?l+" "+s:s;if(c.measureText(m).width>w&&l){c.fillText(l,x,y);y+=lh;l=s}else l=m}c.fillText(l,x,y);return y+lh}
+async function make(kind){try{await document.fonts.load('80px "Archivo Black"')}catch(e){}
+ const W=1080,H=kind==="card"?1440:1920,cv=document.createElement("canvas");cv.width=W;cv.height=H;const c=cv.getContext("2d"),F='"Archivo Black",Impact,sans-serif',S='"Space Grotesk",Arial,sans-serif',nm=$("#nm").value.trim();
+ c.fillStyle=kind==="card"?"#2455e8":"#f2e92e";c.fillRect(0,0,W,H);c.fillStyle="rgba(23,23,23,.12)";for(let x=20;x<W;x+=40)for(let y=20;y<H;y+=40){c.beginPath();c.arc(x,y,3,0,7);c.fill()}
+ const box=(x,y,w,h,f)=>{c.fillStyle="#171717";c.fillRect(x+14,y+14,w,h);c.fillStyle=f;c.fillRect(x,y,w,h);c.lineWidth=6;c.strokeStyle="#171717";c.strokeRect(x,y,w,h)};
+ c.textAlign="center";c.fillStyle="#171717";let y=kind==="card"?110:170;
+ if(kind==="card"){box(90,y-30,900,1020,"#fffdf6");c.fillStyle="#ff4c83";c.save();c.translate(540,y+70);c.rotate(-.05);c.font=`72px ${F}`;c.fillText("🏆 GABARITEI!",0,0);c.restore();
+  c.fillStyle="#171717";c.font=`300px ${F}`;c.fillText("10/10",540,y+390);c.font=`34px ${S}`;c.font=`700 38px ${S}`;c.fillText("situações difíceis de saúde do trabalhador",540,y+460);
+  c.font=`64px ${F}`;c.fillStyle="#2455e8";let yy=wrap(c,(nm||"Seu nome aqui").toUpperCase(),540,y+600,780,76);
+  c.fillStyle="#171717";c.font=`700 34px ${S}`;wrap(c,"Pontuação: "+pts+" pts · Maior sequência: "+best,540,yy+30,780,44);
+  c.fillStyle="#171717";c.font=`40px ${F}`;c.fillText("TRAMPO EM JOGO",540,1160+0);c.font=`700 26px ${S}`;c.fillStyle="#fff";c.fillText("Desenvolvido por Gabriele C. O. dos Santos, Laís M. O. S. Sawaki,",540,1300);c.fillText("Yasmin Medeiros da Silva e Yris dos Santos Bonfim",540,1340)}
+ else{c.font=`110px ${F}`;c.fillText("TRAMPO",540,y+80);c.fillText("EM JOGO",540,y+200);
+  box(90,y+300,900,820,"#fffdf6");c.fillStyle="#171717";c.font=`700 40px ${S}`;c.fillText((nm?nm+" fez":"Eu fiz"),540,y+400);c.font=`330px ${F}`;c.fillText(hits+"/10",540,y+720);
+  c.font=`56px ${F}`;c.fillStyle="#ff4c83";c.fillText($("#rs").textContent,540,y+830);c.fillStyle="#171717";c.font=`700 38px ${S}`;c.fillText(pts+" pontos · sequência "+best,540,y+920);c.fillText("Saúde do trabalhador · nível difícil",540,y+990);
+  box(190,y+1230,700,130,"#ff4c83");c.fillStyle="#171717";c.font=`46px ${F}`;c.fillText("SERÁ QUE VOCÊ GABARITA?",540,y+1315);
+  c.font=`700 28px ${S}`;c.fillText("Desenvolvido por Gabriele C. O. dos Santos, Laís M. O. S. Sawaki,",540,H-90);c.fillText("Yasmin Medeiros da Silva e Yris dos Santos Bonfim",540,H-50)}
+ return new Promise(r=>cv.toBlob(b=>r({b,u:cv.toDataURL("image/png")}),"image/png"))}
+async function gen(k){const r=await make(k);imgBlob=r.b;$("#img").src=r.u;$("#imgbox").classList.remove("hidden");anim($("#imgbox"),[{opacity:0,transform:"scale(.92)"},{opacity:1,transform:"none"}],{duration:450});$("#imgbox").scrollIntoView({behavior:RM?"auto":"smooth",block:"center"})}
+$("#gs").onclick=()=>gen("story");$("#gc").onclick=()=>hits===10&&gen("card");
+$("#si").onclick=async()=>{const f=new File([imgBlob],"trampo-em-jogo.png",{type:"image/png"}),d={files:[f],title:"Trampo em Jogo",text:"Joguei Trampo em Jogo! "+location.href};
+ if(navigator.canShare&&navigator.canShare({files:[f]})){try{await navigator.share(d);return}catch(e){if(e.name==="AbortError")return}}toast("Segure a imagem para salvar e poste nas redes 📲")};
+let qt;$("#quit").onclick=function(){if(this.dataset.s){clearTimeout(qt);delete this.dataset.s;this.textContent="✋ Encerrar jogo";end();return}this.dataset.s=1;this.textContent="Toque de novo para encerrar";qt=setTimeout(()=>{delete this.dataset.s;this.textContent="✋ Encerrar jogo"},3000)};
+$("#start").onclick=start;$("#again").onclick=start;
+</script>
+</body>
+</html>
