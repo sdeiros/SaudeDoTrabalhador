@@ -93,6 +93,7 @@ input{width:100%;min-height:50px;font:inherit;font-size:16px;padding:10px 12px;b
 .ov{position:fixed;inset:0;z-index:100;background:rgba(23,23,23,.92);overflow:auto;padding:calc(16px + env(safe-area-inset-top,0px)) 14px calc(24px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;align-items:center}
 .ov img{width:auto;max-width:min(420px,100%);max-height:62vh;object-fit:contain;border:3px solid #fff;background:#fff}
 .ov .btn{max-width:420px;width:100%}
+.uf{display:inline-block;background:var(--b);color:#fff;font:11px "Archivo Black",sans-serif;padding:4px 8px;border:2px solid var(--ln);margin:6px 6px 0 0;letter-spacing:.06em;transform:rotate(-2deg)}
 .hint{font-size:12px;color:var(--mut);text-align:center}
 .toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translate(-50%,30px);background:#171717;color:#fff;padding:12px 18px;border:2px solid var(--y);font-weight:700;font-size:14px;opacity:0;transition:.3s;pointer-events:none;z-index:99;max-width:90vw;text-align:center}
 .toast.on{opacity:1;transform:translate(-50%,0)}
@@ -120,7 +121,7 @@ footer{font-size:11px;line-height:1.5;color:var(--mut);margin-top:20px}
   <button class="btn p" id="start">Bora jogar →</button>
   <button class="btn" id="share0">↗ Compartilhar jogo</button>
   <button class="btn y" id="inv">🖼️ Imagem de divulgação (Stories)</button>
-  <div class="credits"><b>Desenvolvido por:</b><br>Gabriele Cristina de Oliveira dos Santos<br>Laís Midori de Oliveira Sant’ana Sawaki<br>Yasmin Medeiros da Silva<br>Yris dos Santos Bonfim</div>
+  <div class="credits"><b>Desenvolvido por graduandas do 1º período de Enfermagem</b><br><span class="uf">UFRJ</span>Universidade Federal do Rio de Janeiro<br><br>Gabriele Cristina de Oliveira dos Santos<br>Laís Midori de Oliveira Sant’ana Sawaki<br>Yasmin Medeiros da Silva<br>Yris dos Santos Bonfim</div>
  </div>
 </section>
 
@@ -151,7 +152,7 @@ footer{font-size:11px;line-height:1.5;color:var(--mut);margin-top:20px}
  
  <button class="btn" id="again">↻ Jogar outra partida</button>
  <h3 class="ptitle" style="font-size:18px;margin-top:22px">Revisão</h3><div class="rev" id="rev"></div>
- <div class="credits"><b>Desenvolvido por:</b> Gabriele Cristina de Oliveira dos Santos, Laís Midori de Oliveira Sant’ana Sawaki, Yasmin Medeiros da Silva e Yris dos Santos Bonfim.</div>
+ <div class="credits"><b>Desenvolvido por graduandas do 1º período de Enfermagem da Universidade Federal do Rio de Janeiro (UFRJ):</b> Gabriele Cristina de Oliveira dos Santos, Laís Midori de Oliveira Sant’ana Sawaki, Yasmin Medeiros da Silva e Yris dos Santos Bonfim.</div>
 </section>
 <footer>Jogo educativo. Riscos e direitos variam conforme a atividade, o território e o vínculo. Não substitui avaliação técnica, orientação de serviços de saúde ou assessoria jurídica.</footer>
 </main>
@@ -247,25 +248,23 @@ async function make(kind){try{await document.fonts.load('80px "Archivo Black"')}
  const W=1080,H=kind==="card"?1440:1920,cv=document.createElement("canvas");cv.width=W*2;cv.height=H*2;const c=cv.getContext("2d");c.scale(2,2);const F='"Archivo Black",Impact,sans-serif',S='"Space Grotesk",Arial,sans-serif',nm=$("#nm").value.trim();
  c.fillStyle=kind==="card"?"#2455e8":"#f2e92e";c.fillRect(0,0,W,H);c.fillStyle="rgba(23,23,23,.12)";for(let x=20;x<W;x+=40)for(let y=20;y<H;y+=40){c.beginPath();c.arc(x,y,3,0,7);c.fill()}
  const box=(x,y,w,h,f)=>{c.fillStyle="#171717";c.fillRect(x+14,y+14,w,h);c.fillStyle=f;c.fillRect(x,y,w,h);c.lineWidth=6;c.strokeStyle="#171717";c.strokeRect(x,y,w,h)};
- c.textAlign="center";c.fillStyle="#171717";let y=kind==="card"?110:170;
+ c.textAlign="center";const cred=(y0,col)=>{c.fillStyle=col;c.font=`700 18px ${S}`;c.fillText("DESENVOLVIDO POR GRADUANDAS DO 1º PERÍODO DE ENFERMAGEM",540,y0+30);c.font=`21px ${F}`;c.fillText("UNIVERSIDADE FEDERAL DO RIO DE JANEIRO · UFRJ",540,y0+60);c.font=`600 17px ${S}`;c.fillText("Gabriele C. O. dos Santos · Laís M. O. S. Sawaki",540,y0+86);c.fillText("Yasmin Medeiros da Silva · Yris dos Santos Bonfim",540,y0+110)};c.fillStyle="#171717";let y=kind==="card"?110:170;
  if(kind==="card"){box(90,y-30,900,1020,"#fffdf6");c.fillStyle="#ff4c83";c.save();c.translate(540,y+70);c.rotate(-.05);c.font=`72px ${F}`;c.fillText("GABARITEI!",0,0);c.restore();
   c.fillStyle="#171717";c.font=`300px ${F}`;c.fillText("10/10",540,y+390);c.font=`34px ${S}`;c.font=`700 38px ${S}`;c.fillText("situações difíceis de saúde do trabalhador",540,y+460);
   c.font=`64px ${F}`;c.fillStyle="#2455e8";let yy=wrap(c,(nm||"Seu nome aqui").toUpperCase(),540,y+600,780,76);
   c.fillStyle="#171717";c.font=`700 34px ${S}`;wrap(c,"Pontuação: "+pts+" pts · Maior sequência: "+best,540,yy+30,780,44);
-  c.fillStyle="#171717";c.font=`40px ${F}`;c.fillText("TRAMPO EM JOGO",540,1150);box(90,1185,900,80,"#fffdf6");c.font=`700 24px ${S}`;c.fillStyle="#fff";c.fillText("Desenvolvido por Gabriele C. O. dos Santos, Laís M. O. S. Sawaki,",540,1345);c.fillText("Yasmin Medeiros da Silva e Yris dos Santos Bonfim",540,1385)}
+  c.fillStyle="#171717";c.font=`40px ${F}`;c.fillText("TRAMPO EM JOGO",540,1150);box(90,1185,900,80,"#fffdf6");cred(1312,"#fff")}
  else if(kind==="invite"){c.lineWidth=6;c.strokeStyle="#171717";[["#2455e8",1000,260,420],["#ff4c83",60,1500,520]].forEach(([f,x,yy,r])=>{c.fillStyle=f;c.beginPath();c.arc(x,yy,r,0,7);c.fill();c.stroke()});
   c.fillStyle="#171717";c.font=`150px ${F}`;c.fillText("TRAMPO",540,380);c.fillText("EM JOGO",540,540);
   box(90,650,900,520,"#fffdf6");c.fillStyle="#171717";c.font=`700 38px ${S}`;c.fillText("Saúde do trabalhador · nível difícil",540,740);
   c.font=`64px ${F}`;c.fillText("10 SITUAÇÕES",540,850);c.fillStyle="#2455e8";c.fillText("4 ALTERNATIVAS",540,940);c.fillStyle="#ff4c83";c.fillText("1 LEITURA CERTA",540,1030);
   c.fillStyle="#171717";c.font=`700 32px ${S}`;c.fillText("Catadores, ambulantes,",540,1090);c.fillText("domésticas e construção civil",540,1135);
   box(90,1290,900,130,"#ff4c83");c.fillStyle="#171717";c.font=`40px ${F}`;c.fillText("SERÁ QUE VOCÊ GABARITA?",540,1373);
-  c.font=`700 30px ${S}`;c.fillText("JOGUE AGORA",540,1500);box(90,1525,900,150,"#fffdf6");c.fillStyle="#171717";
-  c.font=`700 24px ${S}`;c.fillText("Desenvolvido por Gabriele C. O. dos Santos, Laís M. O. S. Sawaki,",540,H-90);c.fillText("Yasmin Medeiros da Silva e Yris dos Santos Bonfim",540,H-50)}
+  c.font=`700 30px ${S}`;c.fillText("JOGUE AGORA",540,1500);box(90,1525,900,150,"#fffdf6");cred(H-130,"#171717")}
  else{c.font=`110px ${F}`;c.fillText("TRAMPO",540,y+80);c.fillText("EM JOGO",540,y+200);
   box(90,y+300,900,820,"#fffdf6");c.fillStyle="#171717";c.font=`700 40px ${S}`;c.fillText((nm?nm+" fez":"Eu fiz"),540,y+400);c.font=`330px ${F}`;c.fillText(hits+"/10",540,y+720);
   c.font=`56px ${F}`;c.fillStyle="#ff4c83";c.fillText($("#rs").textContent,540,y+830);c.fillStyle="#171717";c.font=`700 38px ${S}`;c.fillText(pts+" pontos · sequência "+best,540,y+920);c.fillText("Saúde do trabalhador · nível difícil",540,y+990);
-  box(90,y+1230,900,130,"#ff4c83");c.fillStyle="#171717";c.font=`40px ${F}`;c.fillText("SERÁ QUE VOCÊ GABARITA?",540,y+1313);c.font=`700 30px ${S}`;c.fillText("JOGUE AGORA",540,1610);box(90,1635,900,120,"#fffdf6");c.fillStyle="#171717";
-  c.font=`700 24px ${S}`;c.fillText("Desenvolvido por Gabriele C. O. dos Santos, Laís M. O. S. Sawaki,",540,H-90);c.fillText("Yasmin Medeiros da Silva e Yris dos Santos Bonfim",540,H-50)}
+  box(90,y+1230,900,130,"#ff4c83");c.fillStyle="#171717";c.font=`40px ${F}`;c.fillText("SERÁ QUE VOCÊ GABARITA?",540,y+1313);c.font=`700 30px ${S}`;c.fillText("JOGUE AGORA",540,1595);box(90,1615,900,120,"#fffdf6");cred(H-130,"#171717")}
  return new Promise(r=>cv.toBlob(b=>r({b,u:URL.createObjectURL(b)}),"image/png"))}
 let imgKind="story";
 async function gen(k){toast("Gerando imagem…");const r=await make(k);imgBlob=r.b;imgKind=k;$("#img").src=r.u;$("#ov").classList.remove("hidden");$("#ov").scrollTop=0;document.body.style.overflow="hidden";anim($("#ov"),[{opacity:0},{opacity:1}],{duration:300});anim($("#img"),[{opacity:0,transform:"scale(.9) rotate(-2deg)"},{opacity:1,transform:"none"}],{duration:500,easing:"cubic-bezier(.2,1.2,.4,1)"})}
