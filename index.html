@@ -90,6 +90,9 @@ input{width:100%;min-height:50px;font:inherit;font-size:16px;padding:10px 12px;b
 .ri p{font-size:13.5px;line-height:1.55;margin:9px 0 0}
 .ri .w{background:var(--ko);padding:8px;border-left:5px solid #c03e61}
 .ri .g{background:var(--ok);padding:8px;border-left:5px solid #26804d}
+.ov{position:fixed;inset:0;z-index:100;background:rgba(23,23,23,.92);overflow:auto;padding:calc(16px + env(safe-area-inset-top,0px)) 14px calc(24px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;align-items:center}
+.ov img{width:auto;max-width:min(420px,100%);max-height:62vh;object-fit:contain;border:3px solid #fff;background:#fff}
+.ov .btn{max-width:420px;width:100%}
 .hint{font-size:12px;color:var(--mut);text-align:center}
 .toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translate(-50%,30px);background:#171717;color:#fff;padding:12px 18px;border:2px solid var(--y);font-weight:700;font-size:14px;opacity:0;transition:.3s;pointer-events:none;z-index:99;max-width:90vw;text-align:center}
 .toast.on{opacity:1;transform:translate(-50%,0)}
@@ -104,7 +107,7 @@ footer{font-size:11px;line-height:1.5;color:var(--mut);margin-top:20px}
 <body>
 <div aria-hidden="true"><span class="fx" style="left:6%;animation-duration:19s">✊🏽</span><span class="fx" style="left:24%;animation-duration:26s;animation-delay:-8s">♻️</span><span class="fx" style="left:45%;animation-duration:22s;animation-delay:-14s">🧱</span><span class="fx" style="left:63%;animation-duration:28s;animation-delay:-4s">🧹</span><span class="fx" style="left:82%;animation-duration:21s;animation-delay:-11s">🛒</span></div>
 <main class="shell">
-<header><div class="brand"><div class="mark">✳</div>TRAMPO EM JOGO</div><div class="note">Informação também<br>é ferramenta de luta.</div></header>
+<header><div class="brand" id="home" role="button" tabindex="0" aria-label="Voltar ao início" style="cursor:pointer"><div class="mark">✳</div>TRAMPO EM JOGO</div><div class="note">Informação também<br>é ferramenta de luta.</div></header>
 
 <section id="intro">
  <div class="hero"><span class="kicker">Saúde do trabalhador · Nível difícil</span>
@@ -116,6 +119,7 @@ footer{font-size:11px;line-height:1.5;color:var(--mut);margin-top:20px}
   <p class="copy">As alternativas parecem todas razoáveis, mas só uma considera precarização, determinantes sociais, políticas públicas, riscos psicossociais e direitos. Leia a explicação após cada resposta. Quem gabarita ganha um card para postar!</p>
   <button class="btn p" id="start">Bora jogar →</button>
   <button class="btn" id="share0">↗ Compartilhar jogo</button>
+  <button class="btn y" id="inv">🖼️ Imagem de divulgação (Stories)</button>
   <div class="credits"><b>Desenvolvido por:</b><br>Gabriele Cristina de Oliveira dos Santos<br>Laís Midori de Oliveira Sant’ana Sawaki<br>Yasmin Medeiros da Silva<br>Yris dos Santos Bonfim</div>
  </div>
 </section>
@@ -144,7 +148,7 @@ footer{font-size:11px;line-height:1.5;color:var(--mut);margin-top:20px}
  <button class="btn y" id="gs">📲 Criar imagem para Stories</button>
  <button class="btn d" id="gc">🏆 Card de gabarito 3x4</button>
  <p class="hint" id="gh"></p>
- <div id="imgbox" class="hidden"><img class="prev" id="img" alt="Imagem para compartilhar nas redes"><p class="hint">Toque e segure na imagem para salvar.</p><button class="btn p" id="si">↗ Compartilhar imagem</button></div>
+ 
  <button class="btn" id="again">↻ Jogar outra partida</button>
  <h3 class="ptitle" style="font-size:18px;margin-top:22px">Revisão</h3><div class="rev" id="rev"></div>
  <div class="credits"><b>Desenvolvido por:</b> Gabriele Cristina de Oliveira dos Santos, Laís Midori de Oliveira Sant’ana Sawaki, Yasmin Medeiros da Silva e Yris dos Santos Bonfim.</div>
@@ -152,6 +156,7 @@ footer{font-size:11px;line-height:1.5;color:var(--mut);margin-top:20px}
 <footer>Jogo educativo. Riscos e direitos variam conforme a atividade, o território e o vínculo. Não substitui avaliação técnica, orientação de serviços de saúde ou assessoria jurídica.</footer>
 </main>
 <div class="toast" id="toast"></div>
+<div class="ov hidden" id="ov" role="dialog" aria-label="Imagem para compartilhar"><img id="img" alt="Imagem para compartilhar nas redes"><p class="hint" style="color:#f4efdf;max-width:420px">Dica: nos Stories, coloque o sticker de link sobre a caixa branca.</p><button class="btn p" id="dl">⬇ Baixar imagem (alta qualidade)</button><button class="btn y" id="si">↗ Compartilhar imagem</button><button class="btn" id="cl">Fechar</button></div>
 <script>
 // Em cada item a alternativa correta é sempre a primeira (o jogo embaralha).
 const bank=[
@@ -230,7 +235,7 @@ function end(){if(!ans){show("intro");toast("Jogo encerrado. Volte quando quiser
  count($("#big"),hits,v=>`${v}<small>/${ans}</small>`,1100);count($("#rh"),hits,String);count($("#rp"),pts,String,1200);$("#rs2").textContent=best;
  anim($("#rs"),[{transform:"scale(3) rotate(-14deg)",opacity:0},{transform:"scale(1) rotate(-4deg)",opacity:1}],{duration:600,easing:"cubic-bezier(.2,1.4,.4,1)"});
  const gab=hits===10;$("#gc").disabled=!gab;$("#gh").textContent=gab?"🏆 Card liberado! Digite seu nome acima.":"🔒 O card 3x4 é liberado com 10/10. Tente de novo!";
- $("#imgbox").classList.add("hidden");
+ $("#ov").classList.add("hidden");
  $("#rev").innerHTML=Q.slice(0,ans).map((b,n)=>{const r=res[n];return `<details class="ri ${r.ok?"y":"n"}"${r.ok?"":" open"}><summary><b>${r.ok?"✓":"✕"}</b> ${n+1}. ${b.c}</summary><p>${b.q}</p>${r.ok?"":`<p class="w"><b>Você marcou:</b> ${r.ch}</p>`}<p class="g"><b>Resposta certa:</b> ${b.opts.find(o=>o.ok).t}</p>${r.ok?"":`<p><b>Por que você errou:</b> ${W[b.c]}</p>`}<p><b>Por que a certa é a certa:</b> ${b.e}</p></details>`}).join("");
  if(gab)setTimeout(()=>{for(let k=0;k<5;k++)setTimeout(()=>confetti(innerWidth*Math.random(),innerHeight*.35,28),k*250)},500)}
 async function shareGame(){const d={title:"Trampo em Jogo",text:"Encare 10 situações difíceis sobre saúde do trabalhador. Será que você gabarita? ✊🏽",url:location.href};
@@ -239,26 +244,40 @@ async function shareGame(){const d={title:"Trampo em Jogo",text:"Encare 10 situa
 ["share0","share1"].forEach(x=>$("#"+x).onclick=shareGame);
 function wrap(c,t,x,y,w,lh){const ws=t.split(" ");let l="";for(const s of ws){const m=l?l+" "+s:s;if(c.measureText(m).width>w&&l){c.fillText(l,x,y);y+=lh;l=s}else l=m}c.fillText(l,x,y);return y+lh}
 async function make(kind){try{await document.fonts.load('80px "Archivo Black"')}catch(e){}
- const W=1080,H=kind==="card"?1440:1920,cv=document.createElement("canvas");cv.width=W;cv.height=H;const c=cv.getContext("2d"),F='"Archivo Black",Impact,sans-serif',S='"Space Grotesk",Arial,sans-serif',nm=$("#nm").value.trim();
+ const W=1080,H=kind==="card"?1440:1920,cv=document.createElement("canvas");cv.width=W*2;cv.height=H*2;const c=cv.getContext("2d");c.scale(2,2);const F='"Archivo Black",Impact,sans-serif',S='"Space Grotesk",Arial,sans-serif',nm=$("#nm").value.trim();
  c.fillStyle=kind==="card"?"#2455e8":"#f2e92e";c.fillRect(0,0,W,H);c.fillStyle="rgba(23,23,23,.12)";for(let x=20;x<W;x+=40)for(let y=20;y<H;y+=40){c.beginPath();c.arc(x,y,3,0,7);c.fill()}
  const box=(x,y,w,h,f)=>{c.fillStyle="#171717";c.fillRect(x+14,y+14,w,h);c.fillStyle=f;c.fillRect(x,y,w,h);c.lineWidth=6;c.strokeStyle="#171717";c.strokeRect(x,y,w,h)};
  c.textAlign="center";c.fillStyle="#171717";let y=kind==="card"?110:170;
- if(kind==="card"){box(90,y-30,900,1020,"#fffdf6");c.fillStyle="#ff4c83";c.save();c.translate(540,y+70);c.rotate(-.05);c.font=`72px ${F}`;c.fillText("🏆 GABARITEI!",0,0);c.restore();
+ if(kind==="card"){box(90,y-30,900,1020,"#fffdf6");c.fillStyle="#ff4c83";c.save();c.translate(540,y+70);c.rotate(-.05);c.font=`72px ${F}`;c.fillText("GABARITEI!",0,0);c.restore();
   c.fillStyle="#171717";c.font=`300px ${F}`;c.fillText("10/10",540,y+390);c.font=`34px ${S}`;c.font=`700 38px ${S}`;c.fillText("situações difíceis de saúde do trabalhador",540,y+460);
   c.font=`64px ${F}`;c.fillStyle="#2455e8";let yy=wrap(c,(nm||"Seu nome aqui").toUpperCase(),540,y+600,780,76);
   c.fillStyle="#171717";c.font=`700 34px ${S}`;wrap(c,"Pontuação: "+pts+" pts · Maior sequência: "+best,540,yy+30,780,44);
-  c.fillStyle="#171717";c.font=`40px ${F}`;c.fillText("TRAMPO EM JOGO",540,1160+0);c.font=`700 26px ${S}`;c.fillStyle="#fff";c.fillText("Desenvolvido por Gabriele C. O. dos Santos, Laís M. O. S. Sawaki,",540,1300);c.fillText("Yasmin Medeiros da Silva e Yris dos Santos Bonfim",540,1340)}
+  c.fillStyle="#171717";c.font=`40px ${F}`;c.fillText("TRAMPO EM JOGO",540,1150);box(90,1185,900,80,"#fffdf6");c.font=`700 24px ${S}`;c.fillStyle="#fff";c.fillText("Desenvolvido por Gabriele C. O. dos Santos, Laís M. O. S. Sawaki,",540,1345);c.fillText("Yasmin Medeiros da Silva e Yris dos Santos Bonfim",540,1385)}
+ else if(kind==="invite"){c.lineWidth=6;c.strokeStyle="#171717";[["#2455e8",1000,260,420],["#ff4c83",60,1500,520]].forEach(([f,x,yy,r])=>{c.fillStyle=f;c.beginPath();c.arc(x,yy,r,0,7);c.fill();c.stroke()});
+  c.fillStyle="#171717";c.font=`150px ${F}`;c.fillText("TRAMPO",540,380);c.fillText("EM JOGO",540,540);
+  box(90,650,900,520,"#fffdf6");c.fillStyle="#171717";c.font=`700 38px ${S}`;c.fillText("Saúde do trabalhador · nível difícil",540,740);
+  c.font=`64px ${F}`;c.fillText("10 SITUAÇÕES",540,850);c.fillStyle="#2455e8";c.fillText("4 ALTERNATIVAS",540,940);c.fillStyle="#ff4c83";c.fillText("1 LEITURA CERTA",540,1030);
+  c.fillStyle="#171717";c.font=`700 32px ${S}`;c.fillText("Catadores, ambulantes,",540,1090);c.fillText("domésticas e construção civil",540,1135);
+  box(90,1290,900,130,"#ff4c83");c.fillStyle="#171717";c.font=`40px ${F}`;c.fillText("SERÁ QUE VOCÊ GABARITA?",540,1373);
+  c.font=`700 30px ${S}`;c.fillText("JOGUE AGORA",540,1500);box(90,1525,900,150,"#fffdf6");c.fillStyle="#171717";
+  c.font=`700 24px ${S}`;c.fillText("Desenvolvido por Gabriele C. O. dos Santos, Laís M. O. S. Sawaki,",540,H-90);c.fillText("Yasmin Medeiros da Silva e Yris dos Santos Bonfim",540,H-50)}
  else{c.font=`110px ${F}`;c.fillText("TRAMPO",540,y+80);c.fillText("EM JOGO",540,y+200);
   box(90,y+300,900,820,"#fffdf6");c.fillStyle="#171717";c.font=`700 40px ${S}`;c.fillText((nm?nm+" fez":"Eu fiz"),540,y+400);c.font=`330px ${F}`;c.fillText(hits+"/10",540,y+720);
   c.font=`56px ${F}`;c.fillStyle="#ff4c83";c.fillText($("#rs").textContent,540,y+830);c.fillStyle="#171717";c.font=`700 38px ${S}`;c.fillText(pts+" pontos · sequência "+best,540,y+920);c.fillText("Saúde do trabalhador · nível difícil",540,y+990);
-  box(190,y+1230,700,130,"#ff4c83");c.fillStyle="#171717";c.font=`46px ${F}`;c.fillText("SERÁ QUE VOCÊ GABARITA?",540,y+1315);
-  c.font=`700 28px ${S}`;c.fillText("Desenvolvido por Gabriele C. O. dos Santos, Laís M. O. S. Sawaki,",540,H-90);c.fillText("Yasmin Medeiros da Silva e Yris dos Santos Bonfim",540,H-50)}
- return new Promise(r=>cv.toBlob(b=>r({b,u:cv.toDataURL("image/png")}),"image/png"))}
-async function gen(k){const r=await make(k);imgBlob=r.b;$("#img").src=r.u;$("#imgbox").classList.remove("hidden");anim($("#imgbox"),[{opacity:0,transform:"scale(.92)"},{opacity:1,transform:"none"}],{duration:450});$("#imgbox").scrollIntoView({behavior:RM?"auto":"smooth",block:"center"})}
+  box(90,y+1230,900,130,"#ff4c83");c.fillStyle="#171717";c.font=`40px ${F}`;c.fillText("SERÁ QUE VOCÊ GABARITA?",540,y+1313);c.font=`700 30px ${S}`;c.fillText("JOGUE AGORA",540,1610);box(90,1635,900,120,"#fffdf6");c.fillStyle="#171717";
+  c.font=`700 24px ${S}`;c.fillText("Desenvolvido por Gabriele C. O. dos Santos, Laís M. O. S. Sawaki,",540,H-90);c.fillText("Yasmin Medeiros da Silva e Yris dos Santos Bonfim",540,H-50)}
+ return new Promise(r=>cv.toBlob(b=>r({b,u:URL.createObjectURL(b)}),"image/png"))}
+let imgKind="story";
+async function gen(k){toast("Gerando imagem…");const r=await make(k);imgBlob=r.b;imgKind=k;$("#img").src=r.u;$("#ov").classList.remove("hidden");$("#ov").scrollTop=0;document.body.style.overflow="hidden";anim($("#ov"),[{opacity:0},{opacity:1}],{duration:300});anim($("#img"),[{opacity:0,transform:"scale(.9) rotate(-2deg)"},{opacity:1,transform:"none"}],{duration:500,easing:"cubic-bezier(.2,1.2,.4,1)"})}
+async function dl(){if(!imgBlob)return;const fn="trampo-em-jogo-"+imgKind+".png";let d=null;try{d=window.claude&&await claude.use("downloads")}catch(e){}
+ if(d){try{await d.save({filename:fn,data:imgBlob});toast("Imagem salva! ✓")}catch(e){if(e.code!=="declined")toast("Não deu para baixar. Use Compartilhar imagem.")}return}
+ const a=document.createElement("a");a.href=$("#img").src;a.download=fn;document.body.appendChild(a);a.click();a.remove();toast("Baixando imagem…")}
+$("#dl").onclick=dl;$("#inv").onclick=()=>gen("invite");$("#cl").onclick=()=>{$("#ov").classList.add("hidden");document.body.style.overflow=""};
 $("#gs").onclick=()=>gen("story");$("#gc").onclick=()=>hits===10&&gen("card");
 $("#si").onclick=async()=>{const f=new File([imgBlob],"trampo-em-jogo.png",{type:"image/png"}),d={files:[f],title:"Trampo em Jogo",text:"Joguei Trampo em Jogo! "+location.href};
  if(navigator.canShare&&navigator.canShare({files:[f]})){try{await navigator.share(d);return}catch(e){if(e.name==="AbortError")return}}toast("Segure a imagem para salvar e poste nas redes 📲")};
 let qt;$("#quit").onclick=function(){if(this.dataset.s){clearTimeout(qt);delete this.dataset.s;this.textContent="✋ Encerrar jogo";end();return}this.dataset.s=1;this.textContent="Toque de novo para encerrar";qt=setTimeout(()=>{delete this.dataset.s;this.textContent="✋ Encerrar jogo"},3000)};
+const home=()=>{$("#ov").classList.add("hidden");document.body.style.overflow="";show("intro")};$("#home").onclick=home;$("#home").onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();home()}};
 $("#start").onclick=start;$("#again").onclick=start;
 </script>
 </body>
