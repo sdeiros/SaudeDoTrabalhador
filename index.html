@@ -102,6 +102,7 @@ input{width:100%;min-height:50px;font:inherit;font-size:16px;padding:10px 12px;b
 .glitch{animation:gl .6s steps(1) forwards;pointer-events:none}
 .glitch *{text-shadow:2px 0 rgba(255,76,131,.7),-2px 0 rgba(36,85,232,.7)}
 .gin{animation:gl2 .5s steps(1) both}
+.btn.q.conf{background:var(--p);color:var(--on);border-style:solid;box-shadow:3px 3px 0 var(--ln);animation:beat .9s ease-in-out infinite}
 .hint{font-size:12px;color:var(--mut);text-align:center}
 .toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translate(-50%,30px);background:#171717;color:#fff;padding:12px 18px;border:2px solid var(--y);font-weight:700;font-size:14px;opacity:0;transition:.3s;pointer-events:none;z-index:99;max-width:90vw;text-align:center}
 .toast.on{opacity:1;transform:translate(-50%,0)}
@@ -229,7 +230,7 @@ function confetti(x,y,n=16){if(RM)return;const c=["#f2e92e","#ff4c83","#2455e8",
 function start(){Q=sh(bank).map(b=>({...b,opts:sh(b.o.map((t,k)=>({t,ok:k===0})))}));i=hits=pts=streak=best=ans=0;res=[];$("#pts").textContent="0 PTS";show("game");render()}
 function render(){done=false;const b=Q[i];$("#cnt").textContent=`Situação ${String(i+1).padStart(2,"0")} / ${N}`;
  $("#fill").style.width=(i/N*100)+"%";$("#cat").textContent=b.c;$("#q").textContent=b.q;$("#ask").textContent=b.a;
- $("#fb").classList.add("hidden");$("#next").classList.add("hidden");$("#quit").classList.toggle("hidden",i===N-1);$("#quit").textContent="✋ Encerrar jogo";delete $("#quit").dataset.s;
+ $("#fb").classList.add("hidden");$("#next").classList.add("hidden");$("#quit").classList.toggle("hidden",i===N-1);$("#quit").textContent="✋ Encerrar jogo";delete $("#quit").dataset.s;$("#quit").classList.remove("conf");
  const box=$("#opts");box.innerHTML="";
  b.opts.forEach((o,k)=>{const x=document.createElement("button");x.className="opt";x.innerHTML=`<i>${L[k]}</i><span></span>`;x.lastChild.textContent=o.t;x.onclick=()=>pick(k,x);box.appendChild(x);anim(x,[{opacity:0,transform:"translateY(18px)"},{opacity:1,transform:"none"}],{duration:420,delay:140+k*70,easing:"cubic-bezier(.2,.8,.2,1)",fill:"backwards"})});
  anim($("#card"),[{opacity:0,transform:"translateX(46px)"},{opacity:1,transform:"none"}],{duration:450,easing:"cubic-bezier(.2,.8,.2,1)"})}
@@ -302,7 +303,7 @@ $("#dl").onclick=dl;$("#inv").onclick=()=>gen("invite");$("#cl").onclick=()=>{$(
 $("#gs").onclick=()=>gen("story");$("#gc").onclick=()=>hits>=8&&gen("card");
 $("#si").onclick=async()=>{const f=new File([imgBlob],"trampo-em-jogo.png",{type:"image/png"}),d={files:[f],title:"Trampo em Jogo",text:"Joguei Trampo em Jogo! "+SITE};
  if(navigator.canShare&&navigator.canShare({files:[f]})){try{await navigator.share(d);return}catch(e){if(e.name==="AbortError")return}}toast("Segure a imagem para salvar e poste nas redes 📲")};
-let qt;$("#quit").onclick=function(){if(this.dataset.s){clearTimeout(qt);delete this.dataset.s;this.textContent="✋ Encerrar jogo";glitchEnd();return}this.dataset.s=1;this.textContent="Toque de novo para encerrar";qt=setTimeout(()=>{delete this.dataset.s;this.textContent="✋ Encerrar jogo"},3000)};
+let qt;$("#quit").onclick=function(){if(this.dataset.s){clearTimeout(qt);delete this.dataset.s;this.textContent="✋ Encerrar jogo";this.classList.remove("conf");glitchEnd();return}this.dataset.s=1;this.classList.add("conf");this.textContent="Toque de novo para encerrar";qt=setTimeout(()=>{this.classList.remove("conf");delete this.dataset.s;this.textContent="✋ Encerrar jogo"},3000)};
 const home=()=>{$("#ov").classList.add("hidden");document.body.style.overflow="";show("intro")};$("#home").onclick=home;$("#home").onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();home()}};
 $("#start").onclick=start;$("#again").onclick=start;wrapWords($("#intro h1"));introMotion();
 </script>
