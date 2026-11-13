@@ -180,7 +180,7 @@ footer{font-size:11px;line-height:1.5;color:var(--mut);margin-top:20px}
 <footer>Jogo educativo. Riscos e direitos variam conforme a atividade, o território e o vínculo. Não substitui avaliação técnica, orientação de serviços de saúde ou assessoria jurídica.</footer>
 </main>
 <div class="toast" id="toast"></div>
-<div class="ov hidden" id="ov" role="dialog" aria-label="Imagem para compartilhar"><img id="img" alt="Imagem para compartilhar nas redes"><p class="hint" style="color:#f4efdf;margin:10px 0 0">Escolha as cores da arte</p><div class="sw" id="sw"></div><p class="hint" id="oh" style="color:#f4efdf;max-width:420px">Dica: nos Stories, coloque o sticker de link sobre a caixa branca. O endereço do site também está escrito na imagem.</p><button class="btn p" id="dl">⬇ Baixar imagem (alta qualidade)</button><button class="btn y" id="si">↗ Compartilhar imagem</button><button class="btn" id="cl">Fechar</button></div>
+<div class="ov hidden" id="ov" role="dialog" aria-modal="true" aria-label="Imagem para compartilhar"><img id="img" alt="Imagem para compartilhar nas redes"><p class="hint" style="color:#f4efdf;margin:10px 0 0">Escolha as cores da arte</p><div class="sw" id="sw"></div><p class="hint" id="oh" style="color:#f4efdf;max-width:420px">Dica: nos Stories, coloque o sticker de link sobre a caixa branca. O endereço do site também está escrito na imagem.</p><button class="btn p" id="dl">⬇ Baixar imagem (alta qualidade)</button><button class="btn y" id="si">↗ Compartilhar imagem</button><button class="btn" id="cl">Fechar</button></div>
 <script>
 // Em cada item a alternativa correta é sempre a primeira (o jogo embaralha).
 const bank=[
@@ -313,7 +313,11 @@ async function gen(k){toast("Gerando imagem…");imgKind=k;thI=k==="card"?1:0;$(
 async function dl(){if(!imgBlob)return;const fn="trampo-em-jogo-"+imgKind+".png";let d=null;try{d=window.claude&&await claude.use("downloads")}catch(e){}
  if(d){try{await d.save({filename:fn,data:imgBlob});toast("Imagem salva! ✓")}catch(e){if(e.code!=="declined")toast("Não deu para baixar. Use Compartilhar imagem.")}return}
  const a=document.createElement("a");a.href=$("#img").src;a.download=fn;document.body.appendChild(a);a.click();a.remove();toast("Baixando imagem…")}
-$("#dl").onclick=dl;$("#inv").onclick=()=>gen("invite");$("#cl").onclick=()=>{$("#ov").classList.add("hidden");document.body.style.overflow=""};
+$("#dl").onclick=dl;$("#inv").onclick=()=>gen("invite");const ov=$("#ov"),closeOv=()=>{ov.classList.add("hidden");document.body.style.overflow=""};
+$("#cl").onclick=closeOv;
+let ovDown=false;ov.addEventListener("pointerdown",e=>{ovDown=e.target===ov});
+ov.addEventListener("click",e=>{if(ovDown&&e.target===ov)closeOv();ovDown=false});
+addEventListener("keydown",e=>{if(e.key==="Escape"&&!ov.classList.contains("hidden"))closeOv()});
 $("#gs").onclick=()=>gen("story");$("#gc").onclick=()=>hits>=8&&gen("card");
 $("#si").onclick=async()=>{const f=new File([imgBlob],"trampo-em-jogo.png",{type:"image/png"}),d={files:[f],title:"Trampo em Jogo",text:"Joguei Trampo em Jogo! "+SITE};
  if(navigator.canShare&&navigator.canShare({files:[f]})){try{await navigator.share(d);return}catch(e){if(e.name==="AbortError")return}}toast("Segure a imagem para salvar e poste nas redes 📲")};
