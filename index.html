@@ -4,6 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#f2e92e">
+<script>window.__dp=null;addEventListener("beforeinstallprompt",function(e){e.preventDefault();window.__dp=e;dispatchEvent(new Event("pwa-ready"))});</script>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="favicon.ico" sizes="48x48">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<meta name="application-name" content="Trampo em Jogo">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Trampo em Jogo">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <title>Trampo em Jogo — Saúde do Trabalhador</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
@@ -103,6 +114,7 @@ input{width:100%;min-height:50px;font:inherit;font-size:16px;padding:10px 12px;b
 .glitch *{text-shadow:2px 0 rgba(255,76,131,.7),-2px 0 rgba(36,85,232,.7)}
 .gin{animation:gl2 .5s steps(1) both}
 .btn.q.conf{background:var(--p);color:var(--on);border-style:solid;box-shadow:3px 3px 0 var(--ln);animation:beat .9s ease-in-out infinite}
+#ih{font-size:13.5px;line-height:1.55;border:2px dashed var(--ln);padding:12px;margin-top:12px;background:var(--bg)}
 .hint{font-size:12px;color:var(--mut);text-align:center}
 .toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translate(-50%,30px);background:#171717;color:#fff;padding:12px 18px;border:2px solid var(--y);font-weight:700;font-size:14px;opacity:0;transition:.3s;pointer-events:none;z-index:99;max-width:90vw;text-align:center}
 .toast.on{opacity:1;transform:translate(-50%,0)}
@@ -130,6 +142,8 @@ footer{font-size:11px;line-height:1.5;color:var(--mut);margin-top:20px}
   <button class="btn p" id="start">Bora jogar →</button>
   <button class="btn" id="share0">↗ Compartilhar jogo</button>
   <button class="btn y" id="inv">🖼️ Imagem de divulgação (Stories)</button>
+  <button class="btn d" id="inst">📲 Instalar aplicativo</button>
+  <div id="ih" class="hidden" role="status"></div>
   <div class="credits"><b>Desenvolvido por graduandas do 1º período de Enfermagem</b><br><span class="uf">UFRJ</span>Universidade Federal do Rio de Janeiro<br><br>Gabriele Cristina de Oliveira dos Santos<br>Laís Midori de Oliveira Sant’ana Sawaki<br>Yasmin Medeiros da Silva<br>Yris dos Santos Bonfim</div>
  </div>
 </section>
@@ -305,6 +319,26 @@ $("#si").onclick=async()=>{const f=new File([imgBlob],"trampo-em-jogo.png",{type
  if(navigator.canShare&&navigator.canShare({files:[f]})){try{await navigator.share(d);return}catch(e){if(e.name==="AbortError")return}}toast("Segure a imagem para salvar e poste nas redes 📲")};
 let qt;$("#quit").onclick=function(){if(this.dataset.s){clearTimeout(qt);delete this.dataset.s;this.textContent="✋ Encerrar jogo";this.classList.remove("conf");glitchEnd();return}this.dataset.s=1;this.classList.add("conf");this.textContent="Toque de novo para encerrar";qt=setTimeout(()=>{this.classList.remove("conf");delete this.dataset.s;this.textContent="✋ Encerrar jogo"},3000)};
 const home=()=>{$("#ov").classList.add("hidden");document.body.style.overflow="";show("intro")};$("#home").onclick=home;$("#home").onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();home()}};
+const inst=$("#inst"),ih=$("#ih"),UA=navigator.userAgent;
+const isStandalone=()=>matchMedia("(display-mode: standalone)").matches||matchMedia("(display-mode: window-controls-overlay)").matches||navigator.standalone===true;
+const isIOS=/iphone|ipad|ipod/i.test(UA)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
+const isMobile=isIOS||/android|mobile/i.test(UA);
+const inApp=/FBAN|FBAV|Instagram|Line\/|MicroMessenger|TikTok|Snapchat|; wv\)/i.test(UA);
+const tip=h=>{ih.innerHTML=h;ih.classList.remove("hidden");anim(ih,[{opacity:0,transform:"translateY(12px)"},{opacity:1,transform:"none"}],{duration:400})};
+if(isStandalone())inst.classList.add("hidden");
+addEventListener("pwa-ready",()=>inst.classList.remove("hidden"));
+addEventListener("appinstalled",()=>{window.__dp=null;inst.classList.add("hidden");ih.classList.add("hidden");toast("App instalado! Procure o ícone na tela inicial.")});
+function shortcut(){const url=location.origin+location.pathname,mac=/mac/i.test(navigator.platform),
+ txt=mac?'<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"><plist version="1.0"><dict><key>URL</key><string>'+url+'</string></dict></plist>':"[InternetShortcut]\r\nURL="+url+"\r\n",
+ a=document.createElement("a");a.href=URL.createObjectURL(new Blob([txt],{type:"application/octet-stream"}));a.download="Trampo em Jogo"+(mac?".webloc":".url");document.body.appendChild(a);a.click();a.remove();toast("Atalho baixado! ✓")}
+inst.onclick=async()=>{
+ const p=window.__dp;
+ if(p){window.__dp=null;try{p.prompt();const r=await p.userChoice;if(r.outcome==="accepted")toast("Instalando o app…");else toast("Tudo bem! Você pode instalar quando quiser.")}catch(e){}return}
+ if(inApp){tip("<b>Abra no navegador primeiro.</b> Toque nos três pontinhos (⋮ ou ···) e escolha <b>Abrir no navegador</b> (Chrome ou Safari). Depois toque em Instalar aplicativo de novo.");return}
+ if(isIOS){tip("<b>No iPhone ou iPad:</b> o Safari não permite instalar com um toque. Toque em <b>Compartilhar</b> (quadrado com seta para cima), depois em <b>Adicionar à Tela de Início</b> e confirme em <b>Adicionar</b>.");return}
+ if(!isMobile){tip("<b>No computador:</b> clique no ícone de instalar na barra de endereço do Chrome/Edge (ou menu ⋮ › <b>Instalar Trampo em Jogo</b>). Se não aparecer, baixe um atalho: <a href=\"#\" id=\"sc\" style=\"font-weight:700;color:var(--b)\">baixar atalho</a>.");$("#sc").onclick=e=>{e.preventDefault();shortcut()};return}
+ tip("<b>No Android:</b> abra o menu do navegador (⋮) e toque em <b>Instalar aplicativo</b> ou <b>Adicionar à tela inicial</b>.")};
+if("serviceWorker" in navigator&&location.protocol.startsWith("http"))addEventListener("load",()=>navigator.serviceWorker.register("./sw.js",{scope:"./"}).catch(()=>{}));
 $("#start").onclick=start;$("#again").onclick=start;wrapWords($("#intro h1"));introMotion();
 </script>
 </body>
